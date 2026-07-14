@@ -21,10 +21,52 @@ import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Overview = () => {
-  const { data: jobs, isLoading } = useJobs();
+  const { data: jobs, isLoading, isError, error } = useJobs();
 
-  if (isLoading || !jobs) {
-    return <Skeleton className="h-96 rounded-xl" />;
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <Skeleton className="h-10 w-48 rounded-xl" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="h-32 rounded-xl" />
+          ))}
+        </div>
+        <Skeleton className="h-96 rounded-xl" />
+      </div>
+    );
+  }
+
+  if (isError || !jobs) {
+    return (
+      <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
+        <motion.div variants={staggerItem}>
+          <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
+            <LayoutDashboard className="h-6 w-6 text-primary" />
+            Overview
+          </h2>
+          <p className="text-muted-foreground">Visão geral das vagas fechadas e em andamento.</p>
+        </motion.div>
+        <motion.div variants={staggerItem}>
+          <Card className="border-destructive/50 bg-destructive/5">
+            <CardContent className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+              <AlertCircle className="h-12 w-12 text-destructive" />
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold text-destructive">Erro ao carregar dados</h3>
+                <p className="text-sm text-muted-foreground max-w-md">
+                  Não foi possível carregar as vagas do Supabase. Verifique a conexão ou tente recarregar a página.
+                </p>
+                {error && (
+                  <p className="text-xs text-muted-foreground font-mono bg-muted px-3 py-2 rounded">
+                    {error instanceof Error ? error.message : String(error)}
+                  </p>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.div>
+    );
   }
 
   const statusCounts = getStatusCounts(jobs);
