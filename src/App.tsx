@@ -37,7 +37,7 @@ const App = () => {
               <Route path="secondary-status" element={<SecondaryStatus />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </ErrorBoundary>
     </QueryClientProvider>
   );
