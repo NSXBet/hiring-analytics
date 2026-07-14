@@ -22,7 +22,8 @@ import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Overview = () => {
-  const { data: jobs, isLoading, isError, error } = useJobs(2026);
+  const { selectedYear } = useSelectedYear();
+  const { data: jobs, isLoading, isError, error } = useJobs(selectedYear);
 
   if (isLoading) {
     return (
