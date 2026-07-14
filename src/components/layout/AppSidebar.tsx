@@ -10,7 +10,6 @@ import {
   AlertCircle,
   Layers,
   FileText,
-  FileStack,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
