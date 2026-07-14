@@ -6,6 +6,7 @@ import SimpleBarChart from "@/components/charts/SimpleBarChart";
 import StatusDistributionChart from "@/components/charts/StatusDistributionChart";
 import HiringTrendChart from "@/components/charts/HiringTrendChart";
 import { useJobs } from "@/hooks/useJobs";
+import { useSelectedYear } from "@/contexts/YearContext";
 import {
   getTotalJobs,
   getHiredJobs,
