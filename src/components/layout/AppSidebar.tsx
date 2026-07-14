@@ -8,6 +8,9 @@ import {
   PieChart,
   Table2,
   AlertCircle,
+  Layers,
+  FileText,
+  FileStack,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -24,6 +27,9 @@ const navItems: NavItem[] = [
   { title: "Hiring Managers", path: "/hiring-managers", icon: UserCog },
   { title: "Geography", path: "/geography", icon: Globe },
   { title: "Diversity", path: "/diversity", icon: PieChart },
+  { title: "Levels", path: "/levels", icon: Layers },
+  { title: "Contracts", path: "/contracts", icon: FileText },
+  { title: "Contracts by Directorate", path: "/contracts-by-directorate", icon: FileStack },
   { title: "Details", path: "/details", icon: Table2 },
   { title: "Secondary Status", path: "/secondary-status", icon: AlertCircle },
 ];
