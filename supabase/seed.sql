@@ -1,0 +1,28 @@
+TRUNCATE jobs RESTART IDENTITY;
+
+INSERT INTO jobs (cod, role, status, recruiter, hiring_manager, director, country, cost_center, squad, level, opening_date, closing_date, committed_date, gender, notes) VALUES
+('V-2025-001', 'Senior Product Manager', 'Hired', 'Ana Silva', 'Carlos Mendes', 'Product', 'Brazil', 'CC-001', 'Core', 'Senior', '2025-01-10', '2025-02-15', '2025-02-28', 'Female', 'Closed within SLA'),
+('V-2025-002', 'Frontend Engineer', 'Hired', 'Bruno Costa', 'Fernanda Lima', 'Engineering', 'Brazil', 'CC-002', 'Platform', 'Mid', '2025-01-12', '2025-03-10', '2025-02-28', 'Male', 'Delayed due to candidate notice period'),
+('V-2025-003', 'UX Designer', 'Hired', 'Ana Silva', 'Carlos Mendes', 'Product', 'Brazil', 'CC-001', 'Design', 'Senior', '2025-01-15', '2025-02-20', '2025-02-28', 'Female', ''),
+('V-2025-004', 'Data Analyst', 'Hired', 'Carla Dias', 'Roberto Souza', 'Data', 'Mexico', 'CC-003', 'Analytics', 'Mid', '2025-01-20', '2025-04-05', '2025-03-31', 'Male', 'Long process, multiple candidates declined'),
+('V-2025-005', 'Backend Engineer', 'Hired', 'Bruno Costa', 'Fernanda Lima', 'Engineering', 'Brazil', 'CC-002', 'Platform', 'Senior', '2025-02-01', '2025-02-25', '2025-02-28', 'Male', ''),
+('V-2025-006', 'Sales Executive', 'Hired', 'Diego Rocha', 'Patricia Amorim', 'Sales', 'Colombia', 'CC-004', 'Enterprise', 'Mid', '2025-02-05', '2025-03-12', '2025-03-15', 'Female', ''),
+('V-2025-007', 'Customer Success Manager', 'Hired', 'Diego Rocha', 'Patricia Amorim', 'Sales', 'Colombia', 'CC-004', 'CS', 'Senior', '2025-02-10', '2025-05-20', '2025-04-30', 'Male', 'Delayed: hiring manager unavailable'),
+('V-2025-008', 'DevOps Engineer', 'Hired', 'Bruno Costa', 'Fernanda Lima', 'Engineering', 'Brazil', 'CC-002', 'Infra', 'Senior', '2025-02-15', '2025-03-18', '2025-03-31', 'Female', ''),
+('V-2025-009', 'Marketing Specialist', 'Hired', 'Elisa Martins', 'Gustavo Henrique', 'Marketing', 'Brazil', 'CC-005', 'Brand', 'Junior', '2025-02-20', '2025-04-22', '2025-04-15', 'Female', 'Delayed: budget approval'),
+('V-2025-010', 'QA Engineer', 'Hired', 'Carla Dias', 'Fernanda Lima', 'Engineering', 'Brazil', 'CC-002', 'Quality', 'Mid', '2025-03-01', '2025-03-30', '2025-03-31', 'Male', ''),
+('V-2025-011', 'Product Designer', 'Interview', 'Ana Silva', 'Carlos Mendes', 'Product', 'Brazil', 'CC-001', 'Design', 'Mid', '2025-03-05', NULL, '2025-04-30', NULL, ''),
+('V-2025-012', 'Fullstack Engineer', 'Offer', 'Bruno Costa', 'Fernanda Lima', 'Engineering', 'Brazil', 'CC-002', 'Platform', 'Senior', '2025-03-08', NULL, '2025-04-15', NULL, ''),
+('V-2025-013', 'Data Engineer', 'Kick off', 'Carla Dias', 'Roberto Souza', 'Data', 'Mexico', 'CC-003', 'Data Platform', 'Senior', '2025-03-10', NULL, '2025-05-31', NULL, ''),
+('V-2025-014', 'Account Executive', 'Stand By', 'Diego Rocha', 'Patricia Amorim', 'Sales', 'Colombia', 'CC-004', 'SMB', 'Mid', '2025-03-12', NULL, '2025-04-30', NULL, 'On hold: reorganization'),
+('V-2025-015', 'Content Manager', 'Interview', 'Elisa Martins', 'Gustavo Henrique', 'Marketing', 'Brazil', 'CC-005', 'Content', 'Senior', '2025-03-15', NULL, '2025-05-15', NULL, ''),
+('V-2025-016', 'Mobile Engineer', 'Hired', 'Bruno Costa', 'Fernanda Lima', 'Engineering', 'Brazil', 'CC-002', 'Mobile', 'Senior', '2025-03-18', '2025-04-25', '2025-04-30', 'Male', ''),
+('V-2025-017', 'HR Business Partner', 'Hired', 'Ana Silva', 'Juliana Prado', 'People', 'Brazil', 'CC-006', 'HR', 'Senior', '2025-03-20', '2025-04-28', '2025-04-30', 'Female', ''),
+('V-2025-018', 'Financial Analyst', 'Hired', 'Carla Dias', 'Marcelo Braga', 'Finance', 'Brazil', 'CC-007', 'FP&A', 'Mid', '2025-03-22', '2025-06-10', '2025-05-31', 'Male', 'Delayed: candidate ghosted'),
+('V-2025-019', 'Operations Analyst', 'Canceled', 'Diego Rocha', 'Patricia Amorim', 'Sales', 'Colombia', 'CC-004', 'Ops', 'Junior', '2025-03-25', '2025-04-01', NULL, NULL, 'Position canceled'),
+('V-2025-020', 'Security Engineer', 'Turnover', 'Bruno Costa', 'Fernanda Lima', 'Engineering', 'Brazil', 'CC-002', 'Security', 'Senior', '2025-03-28', '2025-04-10', NULL, NULL, 'Candidate accepted counteroffer'),
+('V-2025-021', 'Brand Designer', 'Withdrawn', 'Elisa Martins', 'Gustavo Henrique', 'Marketing', 'Brazil', 'CC-005', 'Brand', 'Mid', '2025-04-01', '2025-04-15', NULL, NULL, 'Candidate withdrew'),
+('V-2025-022', 'SRE', 'TBD', 'Bruno Costa', 'Fernanda Lima', 'Engineering', 'Brazil', 'CC-002', 'Infra', 'Senior', '2025-04-05', NULL, NULL, NULL, 'Status to be defined'),
+('V-2025-023', 'BI Analyst', 'Hired', 'Carla Dias', 'Roberto Souza', 'Data', 'Mexico', 'CC-003', 'Analytics', 'Mid', '2025-04-08', '2025-05-12', '2025-05-15', 'Female', ''),
+('V-2025-024', 'Sales Development Rep', 'Hired', 'Diego Rocha', 'Patricia Amorim', 'Sales', 'Colombia', 'CC-004', 'SDR', 'Junior', '2025-04-10', '2025-05-05', '2025-05-15', 'Male', ''),
+('V-2025-025', 'Product Marketing Manager', 'Hired', 'Elisa Martins', 'Gustavo Henrique', 'Marketing', 'Brazil', 'CC-005', 'Product Marketing', 'Senior', '2025-04-12', '2025-05-18', '2025-05-15', 'Female', 'Delayed: internal approval');
