@@ -29,14 +29,14 @@ export const STATUS_COLORS: Record<JobStatus, string> = {
 };
 
 export const STATUS_LABELS: Record<JobStatus, string> = {
-  Hired: "Contratado",
-  Interview: "Entrevista",
-  Offer: "Oferta",
+  Hired: "Hired",
+  Interview: "Interview",
+  Offer: "Offer",
   "Kick off": "Kick off",
   "Stand By": "Stand By",
-  Canceled: "Cancelado",
+  Canceled: "Canceled",
   Turnover: "Turnover",
-  Withdrawn: "Desistiu",
+  Withdrawn: "Withdrawn",
   TBD: "TBD",
 };
 
