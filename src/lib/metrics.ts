@@ -1,6 +1,7 @@
 import { differenceInCalendarDays, format, parseISO } from "date-fns";
 import { Job, JobStatus, ChartPoint } from "@/types";
 import { CLOSED_STATUSES } from "@/lib/constants";
+import { getEffectiveClosingDate } from "@/lib/yearFilter";
 
 export const countByStatus = (jobs: Job[], status: JobStatus) => jobs.filter((j) => j.status === status).length;
 
@@ -98,8 +99,9 @@ export const getMonthlyTrend = (jobs: Job[], year: number): { name: string; open
       current.opened++;
       counts.set(key, current);
     }
-    if (job.closing_date && job.status === "Hired") {
-      const date = parseISO(job.closing_date);
+    const effectiveClosing = getEffectiveClosingDate(job, year);
+    if (effectiveClosing) {
+      const date = parseISO(effectiveClosing);
       const key = format(date, "MMM/yy");
       const current = counts.get(key) || { opened: 0, hired: 0, date };
       current.hired++;
@@ -132,8 +134,9 @@ export const getMonthlyHires = (jobs: Job[], year: number): ChartPoint[] => {
   const counts = new Map<string, { value: number; date: Date }>();
 
   jobs.forEach((job) => {
-    if (job.closing_date && job.status === "Hired") {
-      const date = parseISO(job.closing_date);
+    const effectiveClosing = getEffectiveClosingDate(job, year);
+    if (effectiveClosing) {
+      const date = parseISO(effectiveClosing);
       const key = format(date, "MMM/yy");
       const current = counts.get(key) || { value: 0, date };
       current.value++;
