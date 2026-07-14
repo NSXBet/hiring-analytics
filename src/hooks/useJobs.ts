@@ -1,8 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchJobs } from "@/services/jobService";
+import { Job } from "@/types";
 
-export const useJobs = () =>
+const getJobYear = (job: Job): number | null => {
+  if (job.closing_date) {
+    return new Date(job.closing_date).getFullYear();
+  }
+  return null;
+};
+
+export const useJobs = (year?: number) =>
   useQuery({
-    queryKey: ["jobs"],
-    queryFn: fetchJobs,
+    queryKey: ["jobs", year],
+    queryFn: async () => {
+      const jobs = await fetchJobs();
+      if (!year) return jobs;
+      return jobs.filter((job) => getJobYear(job) === year);
+    },
   });
