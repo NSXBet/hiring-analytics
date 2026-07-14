@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { LayoutDashboard, Users, Clock, CheckCircle2, AlertCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import MetricCard from "@/components/MetricCard";
+import StatCard from "@/components/StatCard";
 import TimeToFillChart from "@/components/charts/TimeToFillChart";
 import StatusDistributionChart from "@/components/charts/StatusDistributionChart";
 import { useJobs } from "@/hooks/useJobs";
@@ -40,10 +40,10 @@ const Overview = () => {
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <MetricCard title="Total de Vagas" value={getTotalJobs(jobs)} icon={Users} />
-        <MetricCard title="Contratados" value={hiredCount} icon={CheckCircle2} trend={`${Math.round((hiredCount / jobs.length) * 100)}%`} />
-        <MetricCard title="Vagas Abertas" value={openCount} icon={AlertCircle} />
-        <MetricCard title="Tempo Médio de Preenchimento" value={`${avgDays} dias`} icon={Clock} />
+        <StatCard label="Total de Vagas" value={getTotalJobs(jobs)} icon={Users} color="primary" delay={0} />
+        <StatCard label="Contratados" value={hiredCount} icon={CheckCircle2} color="accent" delay={1} />
+        <StatCard label="Vagas Abertas" value={openCount} icon={AlertCircle} color="warning" delay={2} />
+        <StatCard label="Tempo Médio de Preenchimento" value={`${avgDays} dias`} icon={Clock} color="primary" delay={3} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
