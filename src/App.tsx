@@ -15,7 +15,6 @@ import Details from "@/pages/Details";
 import SecondaryStatus from "@/pages/SecondaryStatus";
 import Levels from "@/pages/Levels";
 import Contracts from "@/pages/Contracts";
-import ContractsByDirectorate from "@/pages/ContractsByDirectorate";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,7 +36,6 @@ const App = () => (
               <Route path="diversity" element={<Diversity />} />
               <Route path="levels" element={<Levels />} />
               <Route path="contracts" element={<Contracts />} />
-              <Route path="contracts-by-directorate" element={<ContractsByDirectorate />} />
               <Route path="details" element={<Details />} />
               <Route path="secondary-status" element={<SecondaryStatus />} />
             </Route>

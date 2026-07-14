@@ -29,7 +29,6 @@ const navItems: NavItem[] = [
   { title: "Diversity", path: "/diversity", icon: PieChart },
   { title: "Levels", path: "/levels", icon: Layers },
   { title: "Contracts", path: "/contracts", icon: FileText },
-  { title: "Contracts by Directorate", path: "/contracts-by-directorate", icon: FileStack },
   { title: "Details", path: "/details", icon: Table2 },
   { title: "Secondary Status", path: "/secondary-status", icon: AlertCircle },
 ];

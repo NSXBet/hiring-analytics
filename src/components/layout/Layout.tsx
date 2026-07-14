@@ -10,8 +10,7 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/geography": { title: "Geography", subtitle: "Geographic distribution of positions" },
   "/diversity": { title: "Diversity", subtitle: "Diversity and inclusion metrics" },
   "/levels": { title: "Levels", subtitle: "Hires distribution by level and directorate" },
-  "/contracts": { title: "Contracts", subtitle: "Distribution by contract type" },
-  "/contracts-by-directorate": { title: "Contracts by Directorate", subtitle: "Contract type by directorate" },
+  "/contracts": { title: "Contracts", subtitle: "Contract distribution and breakdown by directorate" },
   "/details": { title: "Details", subtitle: "Complete requisitions table" },
   "/secondary-status": { title: "Secondary Status", subtitle: "Secondary status analysis" },
 };
