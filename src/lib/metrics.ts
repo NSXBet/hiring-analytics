@@ -31,6 +31,21 @@ export const getHiredJobs = (jobs: Job[]) => jobs.filter((j) => j.status === "Hi
 
 export const getClosedJobs = (jobs: Job[]) => jobs.filter((j) => CLOSED_STATUSES.includes(j.status));
 
+export const getSLAAdherence = (jobs: Job[]): number => {
+  const hired = getHiredJobs(jobs).filter((j) => j.closing_date);
+  if (hired.length === 0) return 0;
+  const onTime = hired.filter((j) => {
+    if (!j.committed_date) return true;
+    return differenceInCalendarDays(parseISO(j.closing_date!), parseISO(j.committed_date)) <= 0;
+  }).length;
+  return Math.round((onTime / hired.length) * 100);
+};
+
+export const getConversionRate = (jobs: Job[]): number => {
+  if (jobs.length === 0) return 0;
+  return Math.round((getHiredJobs(jobs).length / jobs.length) * 100);
+};
+
 export const getActiveJobs = (jobs: Job[]) => jobs.filter((j) => !["Hired", "Canceled", "Withdrawn"].includes(j.status));
 
 export const groupBy = <K extends keyof Job>(jobs: Job[], key: K): Record<string, Job[]> =>
