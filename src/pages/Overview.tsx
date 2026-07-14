@@ -23,10 +23,18 @@ const Overview = () => {
     return <Skeleton className="h-96 rounded-xl" />;
   }
 
-  if (error || !jobs) {
+  if (error) {
     return (
       <div className="p-4 text-destructive bg-destructive/10 rounded-lg">
-        Erro ao carregar dados: {error?.message || "Nenhum dado disponível"}
+        Erro ao carregar dados: {error.message}
+      </div>
+    );
+  }
+
+  if (!jobs || jobs.length === 0) {
+    return (
+      <div className="p-4 text-muted-foreground bg-muted rounded-lg">
+        Nenhuma vaga encontrada. jobs={JSON.stringify(jobs)}
       </div>
     );
   }
