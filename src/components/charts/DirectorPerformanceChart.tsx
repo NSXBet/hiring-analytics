@@ -1,7 +1,7 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Cell } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { ChartPoint } from "@/types";
-import { DIRECTOR_COLORS } from "@/lib/constants";
+import { DIRECTOR_COLORS, CHART_COLORS } from "@/lib/constants";
 
 interface DirectorPerformanceChartProps {
   data: ChartPoint[];

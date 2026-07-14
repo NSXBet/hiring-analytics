@@ -41,13 +41,22 @@ export const STATUS_LABELS: Record<JobStatus, string> = {
 };
 
 export const DIRECTOR_COLORS: Record<string, string> = {
+  Technology: "hsl(var(--director-technology))",
+  "Customer Operations": "hsl(var(--director-customer-operations))",
+  Marketing: "hsl(var(--director-marketing))",
+  Commercial: "hsl(var(--director-commercial))",
   Product: "hsl(var(--director-product))",
+  HR: "hsl(var(--director-hr))",
+  Finance: "hsl(var(--director-finance))",
+  Betfair: "hsl(var(--director-betfair))",
+  Operation: "hsl(var(--director-operation))",
+  Legal: "hsl(var(--director-legal))",
+  Unknown: "hsl(var(--director-unknown))",
+  // Legacy mappings kept for compatibility
   Engineering: "hsl(var(--director-engineering))",
   Data: "hsl(var(--director-data))",
   Sales: "hsl(var(--director-sales))",
-  Marketing: "hsl(var(--director-marketing))",
   People: "hsl(var(--director-people))",
-  Finance: "hsl(var(--director-finance))",
 };
 
 export const CHART_COLORS = [
