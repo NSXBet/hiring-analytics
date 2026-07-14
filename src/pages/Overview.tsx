@@ -1,5 +1,4 @@
-import { Users } from "lucide-react";
-import StatCard from "@/components/StatCard";
+import { motion } from "framer-motion";
 import { useJobs } from "@/hooks/useJobs";
 import { getTotalJobs } from "@/lib/metrics";
 
@@ -11,10 +10,9 @@ const Overview = () => {
   }
 
   return (
-    <div className="p-4 space-y-4">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4">
       <div className="bg-blue-100 p-4 rounded">Total jobs: {getTotalJobs(jobs)}</div>
-      <StatCard label="Total de Vagas" value={getTotalJobs(jobs)} icon={Users} color="primary" delay={0} />
-    </div>
+    </motion.div>
   );
 };
 
