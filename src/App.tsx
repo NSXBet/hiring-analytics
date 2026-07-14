@@ -42,7 +42,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
-        <RouterProvider router={router} />
+        <YearProvider>
+          <RouterProvider router={router} />
+        </YearProvider>
       </ErrorBoundary>
     </QueryClientProvider>
   );
