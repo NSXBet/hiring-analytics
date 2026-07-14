@@ -3,17 +3,17 @@ import AppSidebar from "./AppSidebar";
 import Header from "./Header";
 
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
-  "/": { title: "Overview", subtitle: "Visão geral das vagas fechadas e em andamento" },
-  "/performance": { title: "Performance por Diretoria", subtitle: "Análise de contratações por área" },
-  "/recruiters": { title: "Recruiters", subtitle: "Desempenho dos recrutadores" },
-  "/hiring-managers": { title: "Hiring Managers", subtitle: "Análise por gestor de contratação" },
-  "/geography": { title: "Geography", subtitle: "Distribuição geográfica das vagas" },
-  "/diversity": { title: "Diversity", subtitle: "Métricas de diversidade e inclusão" },
-  "/levels": { title: "Levels", subtitle: "Distribuição de contratações por nível e diretoria" },
-  "/contracts": { title: "Contracts", subtitle: "Distribuição por tipo de contrato" },
-  "/contracts-by-directorate": { title: "Contracts by Directorate", subtitle: "Tipo de contrato por diretoria" },
-  "/details": { title: "Details", subtitle: "Tabela completa de requisições" },
-  "/secondary-status": { title: "Secondary Status", subtitle: "Análise de status secundários" },
+  "/": { title: "Overview", subtitle: "Overview of closed and ongoing positions" },
+  "/performance": { title: "Performance by Directorate", subtitle: "Hiring analysis by area" },
+  "/recruiters": { title: "Recruiters", subtitle: "Recruiter performance" },
+  "/hiring-managers": { title: "Hiring Managers", subtitle: "Analysis by hiring manager" },
+  "/geography": { title: "Geography", subtitle: "Geographic distribution of positions" },
+  "/diversity": { title: "Diversity", subtitle: "Diversity and inclusion metrics" },
+  "/levels": { title: "Levels", subtitle: "Hires distribution by level and directorate" },
+  "/contracts": { title: "Contracts", subtitle: "Distribution by contract type" },
+  "/contracts-by-directorate": { title: "Contracts by Directorate", subtitle: "Contract type by directorate" },
+  "/details": { title: "Details", subtitle: "Complete requisitions table" },
+  "/secondary-status": { title: "Secondary Status", subtitle: "Secondary status analysis" },
 };
 
 const Layout = () => {

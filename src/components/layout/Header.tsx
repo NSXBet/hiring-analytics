@@ -43,7 +43,7 @@ const Header = ({ title, subtitle }: HeaderProps) => {
           onValueChange={(value) => setSelectedYear(Number(value))}
         >
           <SelectTrigger className="w-[100px]">
-            <SelectValue placeholder="Ano" />
+            <SelectValue placeholder="Year" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="2025">2025</SelectItem>

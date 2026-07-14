@@ -27,7 +27,7 @@ const DataTable = <T,>({
   columns,
   data,
   keyExtractor,
-  emptyMessage = "Nenhum dado encontrado.",
+  emptyMessage = "No data found.",
   className,
 }: DataTableProps<T>) => (
   <div className={cn("rounded-md border bg-card overflow-hidden", className)}>
