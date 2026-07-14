@@ -37,14 +37,17 @@ CREATE INDEX IF NOT EXISTS idx_jobs_closing_date ON jobs(closing_date);
 ALTER TABLE jobs ENABLE ROW LEVEL SECURITY;
 
 -- Public read access for dashboard data (internal analytics tool)
-CREATE POLICY IF NOT EXISTS "Public read jobs"
+DROP POLICY IF EXISTS "Public read jobs" ON jobs;
+CREATE POLICY "Public read jobs"
   ON jobs FOR SELECT
   USING (true);
 
-CREATE POLICY IF NOT EXISTS "Public insert jobs"
+DROP POLICY IF EXISTS "Public insert jobs" ON jobs;
+CREATE POLICY "Public insert jobs"
   ON jobs FOR INSERT
   WITH CHECK (true);
 
-CREATE POLICY IF NOT EXISTS "Public update jobs"
+DROP POLICY IF EXISTS "Public update jobs" ON jobs;
+CREATE POLICY "Public update jobs"
   ON jobs FOR UPDATE
   USING (true);
