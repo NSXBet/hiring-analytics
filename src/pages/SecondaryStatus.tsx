@@ -5,6 +5,7 @@ import SimpleBarChart from "@/components/charts/SimpleBarChart";
 import DataTable from "@/components/DataTable";
 import StatusBadge from "@/components/StatusBadge";
 import { useJobs } from "@/hooks/useJobs";
+import { useSelectedYear } from "@/contexts/YearContext";
 import { formatDate } from "@/lib/metrics";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -13,7 +14,8 @@ import { Job } from "@/types";
 const SECONDARY_STATUSES = ["Canceled", "Turnover", "Withdrawn", "TBD"] as const;
 
 const SecondaryStatus = () => {
-  const { data: jobs, isLoading } = useJobs(2026);
+  const { selectedYear } = useSelectedYear();
+  const { data: jobs, isLoading } = useJobs(selectedYear);
 
   if (isLoading || !jobs) {
     return <Skeleton className="h-96 rounded-xl" />;

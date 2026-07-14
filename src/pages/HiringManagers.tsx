@@ -5,12 +5,14 @@ import SimpleBarChart from "@/components/charts/SimpleBarChart";
 import DataTable from "@/components/DataTable";
 import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";
+import { useSelectedYear } from "@/contexts/YearContext";
 import { groupBy, toChartPoints, getAverageTimeToFill } from "@/lib/metrics";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const HiringManagers = () => {
-  const { data: jobs, isLoading } = useJobs(2026);
+  const { selectedYear } = useSelectedYear();
+  const { data: jobs, isLoading } = useJobs(selectedYear);
 
   if (isLoading || !jobs) {
     return <Skeleton className="h-96 rounded-xl" />;

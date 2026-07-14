@@ -7,6 +7,7 @@ import FilterBar from "@/components/FilterBar";
 import StatusBadge from "@/components/StatusBadge";
 import DataTable from "@/components/DataTable";
 import { useJobs } from "@/hooks/useJobs";
+import { useSelectedYear } from "@/contexts/YearContext";
 import { formatDate } from "@/lib/metrics";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -15,7 +16,8 @@ import { Job } from "@/types";
 const PAGE_SIZE = 10;
 
 const Details = () => {
-  const { data: jobs, isLoading } = useJobs(2026);
+  const { selectedYear } = useSelectedYear();
+  const { data: jobs, isLoading } = useJobs(selectedYear);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 

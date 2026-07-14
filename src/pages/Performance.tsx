@@ -6,12 +6,14 @@ import { DIRECTOR_COLORS } from "@/lib/constants";
 import DataTable from "@/components/DataTable";
 import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";
+import { useSelectedYear } from "@/contexts/YearContext";
 import { groupBy, toChartPoints, getAverageTimeToFill, getSLAAdherence } from "@/lib/metrics";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Performance = () => {
-  const { data: jobs, isLoading } = useJobs(2026);
+  const { selectedYear } = useSelectedYear();
+  const { data: jobs, isLoading } = useJobs(selectedYear);
 
   if (isLoading || !jobs) {
     return <Skeleton className="h-96 rounded-xl" />;
