@@ -71,7 +71,7 @@ const Performance = () => {
               <CardTitle className="text-base font-semibold">Contratações por Diretoria</CardTitle>
             </CardHeader>
             <CardContent>
-              <DirectorPerformanceChart data={chartData} />
+              <SimpleBarChart data={chartData} label="Contratações" colorMap={DIRECTOR_COLORS} />
             </CardContent>
           </Card>
         </motion.div>
@@ -82,7 +82,7 @@ const Performance = () => {
               <CardTitle className="text-base font-semibold">Tempo Médio de Preenchimento (dias)</CardTitle>
             </CardHeader>
             <CardContent>
-              <TimeToFillChart data={timeToFillData} />
+              <SimpleBarChart data={timeToFillData} label="Dias" colorMap={DIRECTOR_COLORS} />
             </CardContent>
           </Card>
         </motion.div>

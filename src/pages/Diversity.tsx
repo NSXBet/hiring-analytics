@@ -88,7 +88,7 @@ const Diversity = () => {
               <CardTitle className="text-base font-semibold">Contratados por Gênero</CardTitle>
             </CardHeader>
             <CardContent>
-              <DirectorPerformanceChart data={hiredByGender} />
+              <SimpleBarChart data={hiredByGender} label="Contratados" />
             </CardContent>
           </Card>
         </motion.div>

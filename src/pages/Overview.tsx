@@ -118,7 +118,7 @@ const Overview = () => {
               <CardTitle className="text-base font-semibold">Contratações por Mês</CardTitle>
             </CardHeader>
             <CardContent>
-              <TimeToFillChart data={monthlyHires} />
+              <SimpleBarChart data={monthlyHires} label="Contratações" />
             </CardContent>
           </Card>
         </motion.div>

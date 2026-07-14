@@ -67,7 +67,7 @@ const Recruiters = () => {
               <CardTitle className="text-base font-semibold">Contratações por Recruiter</CardTitle>
             </CardHeader>
             <CardContent>
-              <DirectorPerformanceChart data={chartData} />
+              <SimpleBarChart data={chartData} label="Contratações" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
@@ -78,7 +78,7 @@ const Recruiters = () => {
               <CardTitle className="text-base font-semibold">Tempo Médio por Recruiter (dias)</CardTitle>
             </CardHeader>
             <CardContent>
-              <TimeToFillChart data={timeToFillData} />
+              <SimpleBarChart data={timeToFillData} label="Dias" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>

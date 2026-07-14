@@ -67,7 +67,7 @@ const Geography = () => {
               <CardTitle className="text-base font-semibold">Contratações por País</CardTitle>
             </CardHeader>
             <CardContent>
-              <DirectorPerformanceChart data={chartData} />
+              <SimpleBarChart data={chartData} label="Contratações" />
             </CardContent>
           </Card>
         </motion.div>
@@ -78,7 +78,7 @@ const Geography = () => {
               <CardTitle className="text-base font-semibold">Tempo Médio por País (dias)</CardTitle>
             </CardHeader>
             <CardContent>
-              <TimeToFillChart data={timeToFillData} />
+              <SimpleBarChart data={timeToFillData} label="Dias" />
             </CardContent>
           </Card>
         </motion.div>
