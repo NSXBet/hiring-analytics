@@ -1,5 +1,6 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { YearProvider } from "@/contexts/YearContext";
 import Layout from "@/components/layout/Layout";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Overview from "@/pages/Overview";
