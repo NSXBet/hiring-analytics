@@ -1,15 +1,16 @@
+import { parseISO } from "date-fns";
 import { Job } from "@/types";
 
 const getYear = (dateString: string | null | undefined): number | null => {
   if (!dateString) return null;
-  const date = new Date(dateString);
+  const date = parseISO(dateString);
   if (isNaN(date.getTime())) return null;
-  return date.getFullYear();
+  return date.getUTCFullYear();
 };
 
 const isFutureDate = (dateString: string | null | undefined): boolean => {
   if (!dateString) return false;
-  const date = new Date(dateString);
+  const date = parseISO(dateString);
   if (isNaN(date.getTime())) return false;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
