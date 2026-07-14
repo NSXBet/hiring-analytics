@@ -29,15 +29,17 @@ const HiringManagers = () => {
       ? Math.round(managerStats.reduce((sum, r) => sum + (r.total > 0 ? (r.hired / r.total) * 100 : 0), 0) / managerStats.length)
       : 0;
 
+  const topManagers = [...managerStats].sort((a, b) => b.hired - a.hired).slice(0, 15);
+
   const chartData = toChartPoints(
-    managerStats.reduce((acc, { name, hired }) => {
+    topManagers.reduce((acc, { name, hired }) => {
       acc[name] = hired;
       return acc;
     }, {} as Record<string, number>)
   );
 
   const timeToFillData = toChartPoints(
-    managerStats.reduce((acc, { name, avgDays }) => {
+    topManagers.reduce((acc, { name, avgDays }) => {
       acc[name] = avgDays;
       return acc;
     }, {} as Record<string, number>)
@@ -64,10 +66,10 @@ const HiringManagers = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Contratações por Hiring Manager</CardTitle>
+              <CardTitle className="text-base font-semibold">Top 15 Hiring Managers - Contratações</CardTitle>
             </CardHeader>
             <CardContent>
-              <DirectorPerformanceChart data={chartData} />
+              <SimpleBarChart data={chartData} label="Contratações" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
@@ -75,10 +77,10 @@ const HiringManagers = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Tempo Médio por Hiring Manager (dias)</CardTitle>
+              <CardTitle className="text-base font-semibold">Top 15 Hiring Managers - Tempo Médio (dias)</CardTitle>
             </CardHeader>
             <CardContent>
-              <TimeToFillChart data={timeToFillData} />
+              <SimpleBarChart data={timeToFillData} label="Dias" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
