@@ -1,53 +1,27 @@
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { YearProvider } from "@/contexts/YearContext";
-import Layout from "@/components/layout/Layout";
-import ErrorBoundary from "@/components/ErrorBoundary";
-import Overview from "@/pages/Overview";
-import Performance from "@/pages/Performance";
-import Recruiters from "@/pages/Recruiters";
-import HiringManagers from "@/pages/HiringManagers";
-import Geography from "@/pages/Geography";
-import Diversity from "@/pages/Diversity";
-import Details from "@/pages/Details";
-import SecondaryStatus from "@/pages/SecondaryStatus";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000,
-      retry: 1,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
-const router = createHashRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      { index: true, element: <Overview /> },
-      { path: "performance", element: <Performance /> },
-      { path: "recruiters", element: <Recruiters /> },
-      { path: "hiring-managers", element: <HiringManagers /> },
-      { path: "geography", element: <Geography /> },
-      { path: "diversity", element: <Diversity /> },
-      { path: "details", element: <Details /> },
-      { path: "secondary-status", element: <SecondaryStatus /> },
-    ],
-  },
-]);
-
-const App = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ErrorBoundary>
-        <YearProvider>
-          <RouterProvider router={router} />
-        </YearProvider>
-      </ErrorBoundary>
-    </QueryClientProvider>
-  );
-};
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
