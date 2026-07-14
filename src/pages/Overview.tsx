@@ -1,3 +1,5 @@
+import { Users } from "lucide-react";
+import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";
 import { getTotalJobs } from "@/lib/metrics";
 
@@ -9,8 +11,9 @@ const Overview = () => {
   }
 
   return (
-    <div className="p-8 bg-green-100 text-green-900 text-xl font-bold rounded-lg">
-      Total jobs: {getTotalJobs(jobs)}
+    <div className="p-4 space-y-4">
+      <div className="bg-blue-100 p-4 rounded">Total jobs: {getTotalJobs(jobs)}</div>
+      <StatCard label="Total de Vagas" value={getTotalJobs(jobs)} icon={Users} color="primary" delay={0} />
     </div>
   );
 };
