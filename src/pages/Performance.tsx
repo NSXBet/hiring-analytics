@@ -11,7 +11,7 @@ import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Performance = () => {
-  const { data: jobs, isLoading } = useJobs();
+  const { data: jobs, isLoading } = useJobs(2026);
 
   if (isLoading || !jobs) {
     return <Skeleton className="h-96 rounded-xl" />;

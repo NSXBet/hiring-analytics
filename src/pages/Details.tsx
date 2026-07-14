@@ -15,7 +15,7 @@ import { Job } from "@/types";
 const PAGE_SIZE = 10;
 
 const Details = () => {
-  const { data: jobs, isLoading } = useJobs();
+  const { data: jobs, isLoading } = useJobs(2026);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 

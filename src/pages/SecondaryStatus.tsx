@@ -13,7 +13,7 @@ import { Job } from "@/types";
 const SECONDARY_STATUSES = ["Canceled", "Turnover", "Withdrawn", "TBD"] as const;
 
 const SecondaryStatus = () => {
-  const { data: jobs, isLoading } = useJobs();
+  const { data: jobs, isLoading } = useJobs(2026);
 
   if (isLoading || !jobs) {
     return <Skeleton className="h-96 rounded-xl" />;
