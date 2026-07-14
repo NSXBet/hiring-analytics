@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { AlertCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DirectorPerformanceChart from "@/components/charts/DirectorPerformanceChart";
+import SimpleBarChart from "@/components/charts/SimpleBarChart";
 import DataTable from "@/components/DataTable";
 import StatusBadge from "@/components/StatusBadge";
 import { useJobs } from "@/hooks/useJobs";
@@ -57,7 +57,7 @@ const SecondaryStatus = () => {
             <CardTitle className="text-base font-semibold">Distribuição de Status Secundários</CardTitle>
           </CardHeader>
           <CardContent>
-            <DirectorPerformanceChart data={chartData} />
+            <SimpleBarChart data={chartData} label="Quantidade" />
           </CardContent>
         </Card>
       </motion.div>
