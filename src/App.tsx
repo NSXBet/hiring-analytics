@@ -23,20 +23,22 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Overview />} />
-            <Route path="performance" element={<Performance />} />
-            <Route path="recruiters" element={<Recruiters />} />
-            <Route path="hiring-managers" element={<HiringManagers />} />
-            <Route path="geography" element={<Geography />} />
-            <Route path="diversity" element={<Diversity />} />
-            <Route path="details" element={<Details />} />
-            <Route path="secondary-status" element={<SecondaryStatus />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Overview />} />
+              <Route path="performance" element={<Performance />} />
+              <Route path="recruiters" element={<Recruiters />} />
+              <Route path="hiring-managers" element={<HiringManagers />} />
+              <Route path="geography" element={<Geography />} />
+              <Route path="diversity" element={<Diversity />} />
+              <Route path="details" element={<Details />} />
+              <Route path="secondary-status" element={<SecondaryStatus />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ErrorBoundary>
     </QueryClientProvider>
   );
 };
