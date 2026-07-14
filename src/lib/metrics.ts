@@ -132,9 +132,8 @@ export const getMonthlyHires = (jobs: Job[], year: number): ChartPoint[] => {
   const counts = new Map<string, { value: number; date: Date }>();
 
   jobs.forEach((job) => {
-    const effectiveClosing = getEffectiveClosingDate(job, year);
-    if (effectiveClosing) {
-      const date = parseISO(effectiveClosing);
+    if (job.closing_date) {
+      const date = parseISO(job.closing_date);
       const key = format(date, "MMM/yy");
       const current = counts.get(key) || { value: 0, date };
       current.value++;
