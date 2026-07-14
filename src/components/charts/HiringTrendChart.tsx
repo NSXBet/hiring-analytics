@@ -7,8 +7,8 @@ interface HiringTrendChartProps {
 }
 
 const chartConfig = {
-  hired: { label: "Contratados", color: "hsl(var(--chart-2))" },
-  opened: { label: "Abertas", color: "hsl(var(--chart-1))" },
+  hired: { label: "Hired", color: "hsl(var(--chart-2))" },
+  opened: { label: "Open", color: "hsl(var(--chart-1))" },
 };
 
 const HiringTrendChart = ({ data }: HiringTrendChartProps) => (
