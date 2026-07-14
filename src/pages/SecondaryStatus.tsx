@@ -39,7 +39,7 @@ const SecondaryStatus = () => {
           <AlertCircle className="h-6 w-6 text-primary" />
           Secondary Status
         </h2>
-        <p className="text-muted-foreground">Análise de status secundários e desistências.</p>
+        <p className="text-muted-foreground">Secondary status analysis and withdrawals.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-4">
@@ -56,10 +56,10 @@ const SecondaryStatus = () => {
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Distribuição de Status Secundários</CardTitle>
+            <CardTitle className="text-base font-semibold">Secondary Status Distribution</CardTitle>
           </CardHeader>
           <CardContent>
-            <SimpleBarChart data={chartData} label="Quantidade" />
+            <SimpleBarChart data={chartData} label="Quantity" />
           </CardContent>
         </Card>
       </motion.div>
@@ -67,7 +67,7 @@ const SecondaryStatus = () => {
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Requisições com Status Secundário ({secondaryJobs.length})</CardTitle>
+            <CardTitle className="text-base font-semibold">Requisitions with Secondary Status ({secondaryJobs.length})</CardTitle>
           </CardHeader>
           <CardContent>
             <DataTable
@@ -75,14 +75,14 @@ const SecondaryStatus = () => {
               keyExtractor={(row) => row.id}
               columns={[
                 { key: "cod", header: "COD" },
-                { key: "role", header: "Vaga" },
+                { key: "role", header: "Role" },
                 { key: "status", header: "Status", render: (row: Job) => <StatusBadge status={row.status} /> },
                 { key: "recruiter", header: "Recruiter" },
                 { key: "hiring_manager", header: "Hiring Manager" },
-                { key: "director", header: "Diretoria" },
-                { key: "country", header: "País" },
-                { key: "opening_date", header: "Abertura", render: (row: Job) => formatDate(row.opening_date) },
-                { key: "closing_date", header: "Fechamento", render: (row: Job) => formatDate(row.closing_date) },
+                { key: "director", header: "Directorate" },
+                { key: "country", header: "Country" },
+                { key: "opening_date", header: "Opening", render: (row: Job) => formatDate(row.opening_date) },
+                { key: "closing_date", header: "Closing", render: (row: Job) => formatDate(row.closing_date) },
               ]}
             />
           </CardContent>

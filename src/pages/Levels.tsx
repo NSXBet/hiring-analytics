@@ -9,7 +9,6 @@ import { useSelectedYear } from "@/contexts/YearContext";
 import { groupBy, toChartPoints } from "@/lib/metrics";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DIRECTOR_COLORS, CHART_COLORS } from "@/lib/constants";
 
 const Levels = () => {
   const { selectedYear } = useSelectedYear();
@@ -47,7 +46,7 @@ const Levels = () => {
   });
 
   const columns = [
-    { key: "director", header: "Diretoria" },
+    { key: "director", header: "Directorate" },
     ...levels.map((level) => ({ key: level, header: level })),
     { key: "total", header: "Total" },
   ];
@@ -59,15 +58,15 @@ const Levels = () => {
           <Layers className="h-6 w-6 text-primary" />
           Levels
         </h2>
-        <p className="text-muted-foreground">Distribuição de contratações por nível e diretoria.</p>
+        <p className="text-muted-foreground">Hires distribution by level and directorate.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Níveis Distintos" value={levels.length} icon={Layers} color="primary" delay={0} />
-        <StatCard label="Total Contratados" value={hired.length} icon={BarChart3} color="accent" delay={1} />
-        <StatCard label="Diretorias" value={directors.length} icon={Building2} color="primary" delay={2} />
+        <StatCard label="Distinct Levels" value={levels.length} icon={Layers} color="primary" delay={0} />
+        <StatCard label="Total Hired" value={hired.length} icon={BarChart3} color="accent" delay={1} />
+        <StatCard label="Directorates" value={directors.length} icon={Building2} color="primary" delay={2} />
         <StatCard
-          label="Nível Mais Comum"
+          label="Most Common Level"
           value={levelChartData[0]?.name || "—"}
           icon={Layers}
           color="accent"
@@ -79,10 +78,10 @@ const Levels = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Contratações por Level</CardTitle>
+              <CardTitle className="text-base font-semibold">Hires by Level</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={levelChartData} label="Contratações" />
+              <SimpleBarChart data={levelChartData} label="Hires" />
             </CardContent>
           </Card>
         </motion.div>
@@ -104,7 +103,7 @@ const Levels = () => {
                   .filter((d) => d.value > 0)
                   .sort((a, b) => b.value - a.value)
                   .slice(0, 10)}
-                label="Contratações"
+                label="Hires"
                 orientation="horizontal"
               />
             </CardContent>
@@ -115,7 +114,7 @@ const Levels = () => {
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Level por Diretoria</CardTitle>
+            <CardTitle className="text-base font-semibold">Level by Directorate</CardTitle>
           </CardHeader>
           <CardContent>
             <DataTable
