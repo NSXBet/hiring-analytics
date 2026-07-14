@@ -17,10 +17,18 @@ import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Overview = () => {
-  const { data: jobs, isLoading } = useJobs();
+  const { data: jobs, isLoading, error } = useJobs();
 
-  if (isLoading || !jobs) {
+  if (isLoading) {
     return <Skeleton className="h-96 rounded-xl" />;
+  }
+
+  if (error || !jobs) {
+    return (
+      <div className="p-4 text-destructive bg-destructive/10 rounded-lg">
+        Erro ao carregar dados: {error?.message || "Nenhum dado disponível"}
+      </div>
+    );
   }
 
   const statusCounts = getStatusCounts(jobs);
