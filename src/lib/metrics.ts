@@ -62,22 +62,28 @@ export const toChartPoints = (record: Record<string, number>): ChartPoint[] =>
     .sort((a, b) => b.value - a.value);
 
 export const getMonthlyTrend = (jobs: Job[]): ChartPoint[] => {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const opened = new Array(12).fill(0);
-  const hired = new Array(12).fill(0);
+  const counts = new Map<string, { opened: number; hired: number; date: Date }>();
 
   jobs.forEach((job) => {
     if (job.opening_date) {
-      const month = parseISO(job.opening_date).getMonth();
-      opened[month]++;
+      const date = parseISO(job.opening_date);
+      const key = format(date, "MMM/yy");
+      const current = counts.get(key) || { opened: 0, hired: 0, date };
+      current.opened++;
+      counts.set(key, current);
     }
     if (job.closing_date && job.status === "Hired") {
-      const month = parseISO(job.closing_date).getMonth();
-      hired[month]++;
+      const date = parseISO(job.closing_date);
+      const key = format(date, "MMM/yy");
+      const current = counts.get(key) || { opened: 0, hired: 0, date };
+      current.hired++;
+      counts.set(key, current);
     }
   });
 
-  return months.map((name, i) => ({ name, opened: opened[i], hired: hired[i] }));
+  return Array.from(counts.entries())
+    .sort((a, b) => a[1].date.getTime() - b[1].date.getTime())
+    .map(([name, { opened, hired }]) => ({ name, opened, hired }));
 };
 
 export const getTotalJobs = (jobs: Job[]) => jobs.length;
@@ -95,17 +101,21 @@ export const getStatusCounts = (jobs: Job[]): ChartPoint[] =>
     .sort((a, b) => b.value - a.value);
 
 export const getMonthlyHires = (jobs: Job[]): ChartPoint[] => {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const hired = new Array(12).fill(0);
+  const counts = new Map<string, { value: number; date: Date }>();
 
   jobs.forEach((job) => {
     if (job.closing_date && job.status === "Hired") {
-      const month = parseISO(job.closing_date).getMonth();
-      hired[month]++;
+      const date = parseISO(job.closing_date);
+      const key = format(date, "MMM/yy");
+      const current = counts.get(key) || { value: 0, date };
+      current.value++;
+      counts.set(key, current);
     }
   });
 
-  return months.map((name, i) => ({ name, value: hired[i] }));
+  return Array.from(counts.entries())
+    .sort((a, b) => a[1].date.getTime() - b[1].date.getTime())
+    .map(([name, { value }]) => ({ name, value }));
 };
 
 export const formatDate = (date: string | null) => (date ? format(parseISO(date), "dd/MM/yyyy") : "—");
