@@ -65,4 +65,30 @@ export const getMonthlyTrend = (jobs: Job[]): ChartPoint[] => {
   return months.map((name, i) => ({ name, opened: opened[i], hired: hired[i] }));
 };
 
-export const formatDate = (date: string | null) => (date ? format(parseISO(date), "dd/MM/yyyy") : "—");
+export const getTotalJobs = (jobs: Job[]) => jobs.length;
+
+export const getOpenJobs = (jobs: Job[]) => jobs.filter((j) => j.status !== "Hired" && j.status !== "Canceled" && j.status !== "Withdrawn");
+
+export const getStatusCounts = (jobs: Job[]): ChartPoint[] =>
+  Object.entries(
+    jobs.reduce((acc, job) => {
+      acc[job.status] = (acc[job.status] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>)
+  )
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value);
+
+export const getMonthlyHires = (jobs: Job[]): ChartPoint[] => {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const hired = new Array(12).fill(0);
+
+  jobs.forEach((job) => {
+    if (job.closing_date && job.status === "Hired") {
+      const month = parseISO(job.closing_date).getMonth();
+      hired[month]++;
+    }
+  });
+
+  return months.map((name, i) => ({ name, value: hired[i] }));
+};
