@@ -72,8 +72,9 @@ export const getMonthlyTrend = (jobs: Job[]): ChartPoint[] => {
       current.opened++;
       counts.set(key, current);
     }
-    if (job.closing_date && job.status === "Hired") {
-      const date = parseISO(job.closing_date);
+    const refDate = (job as Job & { referenceDate?: string | null }).referenceDate || job.closing_date;
+    if (refDate && job.status === "Hired") {
+      const date = parseISO(refDate);
       const key = format(date, "MMM/yy");
       const current = counts.get(key) || { opened: 0, hired: 0, date };
       current.hired++;
@@ -104,8 +105,9 @@ export const getMonthlyHires = (jobs: Job[]): ChartPoint[] => {
   const counts = new Map<string, { value: number; date: Date }>();
 
   jobs.forEach((job) => {
-    if (job.closing_date && job.status === "Hired") {
-      const date = parseISO(job.closing_date);
+    const refDate = (job as Job & { referenceDate?: string | null }).referenceDate || job.closing_date;
+    if (refDate && job.status === "Hired") {
+      const date = parseISO(refDate);
       const key = format(date, "MMM/yy");
       const current = counts.get(key) || { value: 0, date };
       current.value++;
