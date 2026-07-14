@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "@/components/layout/Layout";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -20,24 +20,28 @@ const queryClient = new QueryClient({
   },
 });
 
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: <Overview /> },
+      { path: "performance", element: <Performance /> },
+      { path: "recruiters", element: <Recruiters /> },
+      { path: "hiring-managers", element: <HiringManagers /> },
+      { path: "geography", element: <Geography /> },
+      { path: "diversity", element: <Diversity /> },
+      { path: "details", element: <Details /> },
+      { path: "secondary-status", element: <SecondaryStatus /> },
+    ],
+  },
+]);
+
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
-        <HashRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Overview />} />
-              <Route path="performance" element={<Performance />} />
-              <Route path="recruiters" element={<Recruiters />} />
-              <Route path="hiring-managers" element={<HiringManagers />} />
-              <Route path="geography" element={<Geography />} />
-              <Route path="diversity" element={<Diversity />} />
-              <Route path="details" element={<Details />} />
-              <Route path="secondary-status" element={<SecondaryStatus />} />
-            </Route>
-          </Routes>
-        </HashRouter>
+        <RouterProvider router={router} />
       </ErrorBoundary>
     </QueryClientProvider>
   );
