@@ -52,24 +52,24 @@ const Recruiters = () => {
           <Users className="h-6 w-6 text-primary" />
           Recruiters
         </h2>
-        <p className="text-muted-foreground">Desempenho dos recrutadores por volume e conversão.</p>
+        <p className="text-muted-foreground">Recruiter performance by volume and conversion.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total de Recruiters" value={recruiterStats.length} icon={Users} color="primary" delay={0} />
+        <StatCard label="Total Recruiters" value={recruiterStats.length} icon={Users} color="primary" delay={0} />
         <StatCard label="Top Recruiter" value={sortedByHired[0]?.name || "—"} icon={UserCheck} color="accent" delay={1} />
-        <StatCard label="Conversão Média" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
-        <StatCard label="Tempo Médio Geral" value={`${getAverageTimeToFill(jobs)} dias`} icon={Clock} color="primary" delay={3} />
+        <StatCard label="Average Conversion" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
+        <StatCard label="Overall Average Time" value={`${getAverageTimeToFill(jobs)} days`} icon={Clock} color="primary" delay={3} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Contratações por Recruiter</CardTitle>
+              <CardTitle className="text-base font-semibold">Hires by Recruiter</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={chartData} label="Contratações" orientation="horizontal" />
+              <SimpleBarChart data={chartData} label="Hires" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
@@ -77,10 +77,10 @@ const Recruiters = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Tempo Médio por Recruiter (dias)</CardTitle>
+              <CardTitle className="text-base font-semibold">Average Time by Recruiter (days)</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={timeToFillData} label="Dias" orientation="horizontal" />
+              <SimpleBarChart data={timeToFillData} label="Days" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
@@ -89,7 +89,7 @@ const Recruiters = () => {
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Ranking de Recruiters</CardTitle>
+            <CardTitle className="text-base font-semibold">Recruiter Ranking</CardTitle>
           </CardHeader>
           <CardContent>
             <DataTable
@@ -97,14 +97,14 @@ const Recruiters = () => {
               keyExtractor={(row) => row.name}
               columns={[
                 { key: "name", header: "Recruiter" },
-                { key: "total", header: "Vagas" },
-                { key: "hired", header: "Contratados" },
+                { key: "total", header: "Jobs" },
+                { key: "hired", header: "Hired" },
                 {
                   key: "conversion",
-                  header: "Conversão",
+                  header: "Conversion",
                   render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
                 },
-                { key: "avgDays", header: "Tempo Médio (dias)" },
+                { key: "avgDays", header: "Average Time (days)" },
               ]}
             />
           </CardContent>

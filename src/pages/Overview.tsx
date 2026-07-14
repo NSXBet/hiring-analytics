@@ -47,16 +47,16 @@ const Overview = () => {
             <LayoutDashboard className="h-6 w-6 text-primary" />
             Overview
           </h2>
-          <p className="text-muted-foreground">Visão geral das vagas fechadas e em andamento.</p>
+          <p className="text-muted-foreground">Overview of closed and ongoing jobs.</p>
         </motion.div>
         <motion.div variants={staggerItem}>
           <Card className="border-destructive/50 bg-destructive/5">
             <CardContent className="flex flex-col items-center justify-center gap-4 py-12 text-center">
               <AlertCircle className="h-12 w-12 text-destructive" />
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold text-destructive">Erro ao carregar dados</h3>
+                <h3 className="text-lg font-semibold text-destructive">Error loading data</h3>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  Não foi possível carregar as vagas do Supabase. Verifique a conexão ou tente recarregar a página.
+                  Unable to load jobs from Supabase. Check the connection or try reloading the page.
                 </p>
                 {error && (
                   <p className="text-xs text-muted-foreground font-mono bg-muted px-3 py-2 rounded">
@@ -87,26 +87,26 @@ const Overview = () => {
           <LayoutDashboard className="h-6 w-6 text-primary" />
           Overview
         </h2>
-        <p className="text-muted-foreground">Visão geral das vagas fechadas e em andamento.</p>
+        <p className="text-muted-foreground">Overview of closed and ongoing jobs.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total de Vagas" value={getTotalJobs(jobs)} icon={Users} color="primary" delay={0} />
-        <StatCard label="Contratados" value={hiredCount} icon={CheckCircle2} color="accent" delay={1} />
-        <StatCard label="Vagas Abertas" value={openCount} icon={AlertCircle} color="warning" delay={2} />
-        <StatCard label="Tempo Médio de Preenchimento" value={`${avgDays} dias`} icon={Clock} color="primary" delay={3} />
+        <StatCard label="Total Jobs" value={getTotalJobs(jobs)} icon={Users} color="primary" delay={0} />
+        <StatCard label="Hired" value={hiredCount} icon={CheckCircle2} color="accent" delay={1} />
+        <StatCard label="Open Jobs" value={openCount} icon={AlertCircle} color="warning" delay={2} />
+        <StatCard label="Average Time to Fill" value={`${avgDays} days`} icon={Clock} color="primary" delay={3} />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Taxa de Conversão" value={`${conversionRate}%`} icon={TrendingUp} color="accent" delay={4} />
-        <StatCard label="Aderência ao Prazo" value={`${slaAdherence}%`} icon={Target} color="primary" delay={5} />
+        <StatCard label="Conversion Rate" value={`${conversionRate}%`} icon={TrendingUp} color="accent" delay={4} />
+        <StatCard label="SLA Adherence" value={`${slaAdherence}%`} icon={Target} color="primary" delay={5} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Tendência de Contratações</CardTitle>
+              <CardTitle className="text-base font-semibold">Hiring Trend</CardTitle>
             </CardHeader>
             <CardContent>
               <HiringTrendChart data={monthlyTrend} />
@@ -117,10 +117,10 @@ const Overview = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Contratações por Mês</CardTitle>
+              <CardTitle className="text-base font-semibold">Hires by Month</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={monthlyHires} label="Contratações" />
+              <SimpleBarChart data={monthlyHires} label="Hires" />
             </CardContent>
           </Card>
         </motion.div>
@@ -130,7 +130,7 @@ const Overview = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Distribuição de Status</CardTitle>
+              <CardTitle className="text-base font-semibold">Status Distribution</CardTitle>
             </CardHeader>
             <CardContent className="h-[300px]">
               <StatusDistributionChart data={statusCounts} />
@@ -141,7 +141,7 @@ const Overview = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Resumo por Status</CardTitle>
+              <CardTitle className="text-base font-semibold">Status Summary</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 gap-3">

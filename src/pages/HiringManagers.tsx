@@ -54,24 +54,24 @@ const HiringManagers = () => {
           <UserCog className="h-6 w-6 text-primary" />
           Hiring Managers
         </h2>
-        <p className="text-muted-foreground">Análise de contratações por gestor responsável.</p>
+        <p className="text-muted-foreground">Hiring analysis by hiring manager.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total de Gestores" value={managerStats.length} icon={Users} color="primary" delay={0} />
-        <StatCard label="Top Gestor" value={sortedByHired[0]?.name || "—"} icon={UserCog} color="accent" delay={1} />
-        <StatCard label="Conversão Média" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
-        <StatCard label="Tempo Médio Geral" value={`${getAverageTimeToFill(jobs)} dias`} icon={Clock} color="primary" delay={3} />
+        <StatCard label="Total Managers" value={managerStats.length} icon={Users} color="primary" delay={0} />
+        <StatCard label="Top Manager" value={sortedByHired[0]?.name || "—"} icon={UserCog} color="accent" delay={1} />
+        <StatCard label="Average Conversion" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
+        <StatCard label="Overall Average Time" value={`${getAverageTimeToFill(jobs)} days`} icon={Clock} color="primary" delay={3} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Top 15 Hiring Managers - Contratações</CardTitle>
+              <CardTitle className="text-base font-semibold">Top 15 Hiring Managers - Hires</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={chartData} label="Contratações" orientation="horizontal" />
+              <SimpleBarChart data={chartData} label="Hires" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
@@ -79,10 +79,10 @@ const HiringManagers = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Top 15 Hiring Managers - Tempo Médio (dias)</CardTitle>
+              <CardTitle className="text-base font-semibold">Top 15 Hiring Managers - Average Time (days)</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={timeToFillData} label="Dias" orientation="horizontal" />
+              <SimpleBarChart data={timeToFillData} label="Days" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
@@ -91,7 +91,7 @@ const HiringManagers = () => {
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Detalhamento por Hiring Manager</CardTitle>
+            <CardTitle className="text-base font-semibold">Detailed View by Hiring Manager</CardTitle>
           </CardHeader>
           <CardContent>
             <DataTable
@@ -99,14 +99,14 @@ const HiringManagers = () => {
               keyExtractor={(row) => row.name}
               columns={[
                 { key: "name", header: "Hiring Manager" },
-                { key: "total", header: "Vagas" },
-                { key: "hired", header: "Contratados" },
+                { key: "total", header: "Jobs" },
+                { key: "hired", header: "Hired" },
                 {
                   key: "conversion",
-                  header: "Conversão",
+                  header: "Conversion",
                   render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
                 },
-                { key: "avgDays", header: "Tempo Médio (dias)" },
+                { key: "avgDays", header: "Average Time (days)" },
               ]}
             />
           </CardContent>

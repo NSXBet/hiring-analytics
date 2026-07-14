@@ -48,32 +48,32 @@ const Performance = () => {
       <motion.div variants={staggerItem}>
         <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
           <BarChart3 className="h-6 w-6 text-primary" />
-          Performance por Diretoria
+          Performance by Directorate
         </h2>
-        <p className="text-muted-foreground">Contratações e tempo médio de preenchimento por área.</p>
+        <p className="text-muted-foreground">Hires and average time to fill by area.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Diretorias" value={directorHired.length} icon={Building2} color="primary" delay={0} />
-        <StatCard label="Top Diretoria" value={sortedByHired[0]?.name || "—"} icon={Trophy} color="accent" delay={1} />
+        <StatCard label="Directorates" value={directorHired.length} icon={Building2} color="primary" delay={0} />
+        <StatCard label="Top Directorate" value={sortedByHired[0]?.name || "—"} icon={Trophy} color="accent" delay={1} />
         <StatCard
-          label="Menor Tempo Médio"
-          value={sortedByTime[0] ? `${sortedByTime[0].avgDays} dias` : "—"}
+          label="Lowest Average Time"
+          value={sortedByTime[0] ? `${sortedByTime[0].avgDays} days` : "—"}
           icon={Clock}
           color="primary"
           delay={2}
         />
-        <StatCard label="Aderência ao Prazo" value={`${getSLAAdherence(jobs)}%`} icon={Target} color="accent" delay={3} />
+        <StatCard label="SLA Adherence" value={`${getSLAAdherence(jobs)}%`} icon={Target} color="accent" delay={3} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Contratações por Diretoria</CardTitle>
+              <CardTitle className="text-base font-semibold">Hires by Directorate</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={chartData} label="Contratações" colorMap={DIRECTOR_COLORS} />
+              <SimpleBarChart data={chartData} label="Hires" colorMap={DIRECTOR_COLORS} />
             </CardContent>
           </Card>
         </motion.div>
@@ -81,10 +81,10 @@ const Performance = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Tempo Médio de Preenchimento (dias)</CardTitle>
+              <CardTitle className="text-base font-semibold">Average Time to Fill (days)</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={timeToFillData} label="Dias" colorMap={DIRECTOR_COLORS} />
+              <SimpleBarChart data={timeToFillData} label="Days" colorMap={DIRECTOR_COLORS} />
             </CardContent>
           </Card>
         </motion.div>
@@ -93,22 +93,22 @@ const Performance = () => {
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Detalhamento por Diretoria</CardTitle>
+            <CardTitle className="text-base font-semibold">Detailed View by Directorate</CardTitle>
           </CardHeader>
           <CardContent>
             <DataTable
               data={directorHired}
               keyExtractor={(row) => row.name}
               columns={[
-                { key: "name", header: "Diretoria" },
-                { key: "total", header: "Total de Vagas" },
-                { key: "hired", header: "Contratados" },
+                { key: "name", header: "Directorate" },
+                { key: "total", header: "Total Jobs" },
+                { key: "hired", header: "Hired" },
                 {
                   key: "conversion",
-                  header: "Conversão",
+                  header: "Conversion",
                   render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
                 },
-                { key: "avgDays", header: "Tempo Médio (dias)" },
+                { key: "avgDays", header: "Average Time (days)" },
               ]}
             />
           </CardContent>
