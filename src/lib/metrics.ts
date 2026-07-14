@@ -1,7 +1,6 @@
 import { differenceInCalendarDays, format, parseISO } from "date-fns";
 import { Job, JobStatus, ChartPoint } from "@/types";
 import { CLOSED_STATUSES } from "@/lib/constants";
-import { getEffectiveClosingDate } from "@/lib/yearFilter";
 
 export const countByStatus = (jobs: Job[], status: JobStatus) => jobs.filter((j) => j.status === status).length;
 
