@@ -75,8 +75,8 @@ const Overview = () => {
   const hiredCount = getHiredJobs(jobs).length;
   const openCount = getOpenJobs(jobs).length;
   const avgDays = getAverageTimeToFill(jobs);
-  const monthlyHires = getMonthlyHires(jobs);
-  const monthlyTrend = getMonthlyTrend(jobs);
+  const monthlyHires = getMonthlyHires(jobs, selectedYear);
+  const monthlyTrend = getMonthlyTrend(jobs, selectedYear);
   const slaAdherence = getSLAAdherence(jobs);
   const conversionRate = getConversionRate(jobs);
 
