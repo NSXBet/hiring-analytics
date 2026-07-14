@@ -69,14 +69,14 @@ const Details = () => {
           <Table2 className="h-6 w-6 text-primary" />
           Details
         </h2>
-        <p className="text-muted-foreground">Tabela completa de requisições com busca e exportação.</p>
+        <p className="text-muted-foreground">Complete requisitions table with search and export.</p>
       </motion.div>
 
       <motion.div variants={staggerItem}>
-        <FilterBar search={search} onSearchChange={(v) => { setSearch(v); setPage(1); }} placeholder="Buscar por vaga, recruiter, gestor, diretoria...">
+        <FilterBar search={search} onSearchChange={(v) => { setSearch(v); setPage(1); }} placeholder="Search by role, recruiter, manager, directorate...">
           <Button variant="outline" size="sm" className="gap-2" onClick={exportCsv}>
             <Download className="h-4 w-4" />
-            Exportar CSV
+            Export CSV
           </Button>
         </FilterBar>
       </motion.div>
@@ -84,7 +84,7 @@ const Details = () => {
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Requisições ({filtered.length})</CardTitle>
+            <CardTitle className="text-base font-semibold">Requisitions ({filtered.length})</CardTitle>
           </CardHeader>
           <CardContent>
             <DataTable
@@ -92,20 +92,20 @@ const Details = () => {
               keyExtractor={(row) => row.id}
               columns={[
                 { key: "cod", header: "COD" },
-                { key: "role", header: "Vaga" },
+                { key: "role", header: "Role" },
                 { key: "status", header: "Status", render: (row: Job) => <StatusBadge status={row.status} /> },
                 { key: "recruiter", header: "Recruiter" },
                 { key: "hiring_manager", header: "Hiring Manager" },
-                { key: "director", header: "Diretoria" },
-                { key: "country", header: "País" },
+                { key: "director", header: "Directorate" },
+                { key: "country", header: "Country" },
                 { key: "level", header: "Level" },
-                { key: "opening_date", header: "Abertura", render: (row: Job) => formatDate(row.opening_date) },
-                { key: "closing_date", header: "Fechamento", render: (row: Job) => formatDate(row.closing_date) },
+                { key: "opening_date", header: "Opening", render: (row: Job) => formatDate(row.opening_date) },
+                { key: "closing_date", header: "Closing", render: (row: Job) => formatDate(row.closing_date) },
               ]}
             />
             <div className="mt-4 flex items-center justify-between">
               <p className="text-sm text-muted-foreground">
-                Página {page} de {totalPages}
+                Page {page} of {totalPages}
               </p>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}>

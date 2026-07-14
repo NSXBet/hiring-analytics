@@ -52,24 +52,24 @@ const Geography = () => {
           <Globe className="h-6 w-6 text-primary" />
           Geography
         </h2>
-        <p className="text-muted-foreground">Distribuição de contratações por país.</p>
+        <p className="text-muted-foreground">Hires distribution by country.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Países" value={countryStats.length} icon={MapPin} color="primary" delay={0} />
-        <StatCard label="Top País" value={sortedByHired[0]?.name || "—"} icon={Globe} color="accent" delay={1} />
-        <StatCard label="Conversão Média" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
-        <StatCard label="Tempo Médio Geral" value={`${getAverageTimeToFill(jobs)} dias`} icon={Clock} color="primary" delay={3} />
+        <StatCard label="Countries" value={countryStats.length} icon={MapPin} color="primary" delay={0} />
+        <StatCard label="Top Country" value={sortedByHired[0]?.name || "—"} icon={Globe} color="accent" delay={1} />
+        <StatCard label="Average Conversion" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
+        <StatCard label="Overall Average Time" value={`${getAverageTimeToFill(jobs)} days`} icon={Clock} color="primary" delay={3} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Contratações por País</CardTitle>
+              <CardTitle className="text-base font-semibold">Hires by Country</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={chartData} label="Contratações" />
+              <SimpleBarChart data={chartData} label="Hires" />
             </CardContent>
           </Card>
         </motion.div>
@@ -77,10 +77,10 @@ const Geography = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Tempo Médio por País (dias)</CardTitle>
+              <CardTitle className="text-base font-semibold">Average Time by Country (days)</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={timeToFillData} label="Dias" />
+              <SimpleBarChart data={timeToFillData} label="Days" />
             </CardContent>
           </Card>
         </motion.div>
@@ -89,22 +89,22 @@ const Geography = () => {
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Detalhamento por País</CardTitle>
+            <CardTitle className="text-base font-semibold">Detailed View by Country</CardTitle>
           </CardHeader>
           <CardContent>
             <DataTable
               data={countryStats}
               keyExtractor={(row) => row.name}
               columns={[
-                { key: "name", header: "País" },
-                { key: "total", header: "Total de Vagas" },
-                { key: "hired", header: "Contratados" },
+                { key: "name", header: "Country" },
+                { key: "total", header: "Total Jobs" },
+                { key: "hired", header: "Hired" },
                 {
                   key: "conversion",
-                  header: "Conversão",
+                  header: "Conversion",
                   render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
                 },
-                { key: "avgDays", header: "Tempo Médio (dias)" },
+                { key: "avgDays", header: "Average Time (days)" },
               ]}
             />
           </CardContent>
