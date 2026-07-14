@@ -13,6 +13,19 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/secondary-status": { title: "Secondary Status", subtitle: "Análise de status secundários" },
 };
 
+const DebugLocation = () => {
+  const location = useLocation();
+  if (typeof window === "undefined") return null;
+  return (
+    <div className="fixed bottom-4 right-4 z-50 bg-black text-white p-2 text-xs rounded shadow-lg">
+      <div>pathname: {location.pathname}</div>
+      <div>hash: {location.hash}</div>
+      <div>window.href: {window.location.href}</div>
+      <div>window.hash: {window.location.hash}</div>
+    </div>
+  );
+};
+
 const Layout = () => {
   const location = useLocation();
   const { title, subtitle } = pageTitles[location.pathname] || { title: "Dashboard", subtitle: "" };
@@ -26,6 +39,7 @@ const Layout = () => {
           <Outlet />
         </main>
       </div>
+      <DebugLocation />
     </div>
   );
 };
