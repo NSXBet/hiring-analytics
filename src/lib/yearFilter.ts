@@ -12,9 +12,9 @@ const getYear = (dateString: string | null | undefined): number | null => {
 };
 
 /**
- * Filters jobs that belong to a given year.
- * - Hired jobs: year is determined by closing_date, falling back to committed_date.
- * - Non-hired jobs: year is determined by opening_date.
+ * Filters jobs that belong to a given year based on the business rule:
+ * - Hired jobs: year is determined exclusively by closing_date (when we closed).
+ * - Non-hired jobs: year is determined by opening_date (when the req was opened).
  * Returns jobs augmented with `referenceDate` used for monthly/directorate breakdowns.
  */
 export const filterJobsByYear = (jobs: Job[] | undefined, year: number): YearJob[] => {
@@ -25,16 +25,11 @@ export const filterJobsByYear = (jobs: Job[] | undefined, year: number): YearJob
       let referenceDate: string | null = null;
 
       if (job.status === "Hired") {
-        const closingYear = getYear(job.closing_date);
-        const committedYear = getYear(job.committed_date);
-        if (closingYear === year) {
+        if (getYear(job.closing_date) === year) {
           referenceDate = job.closing_date ?? null;
-        } else if (committedYear === year) {
-          referenceDate = job.committed_date ?? null;
         }
       } else {
-        const openingYear = getYear(job.opening_date);
-        if (openingYear === year) {
+        if (getYear(job.opening_date) === year) {
           referenceDate = job.opening_date ?? null;
         }
       }
