@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
-import { Globe } from "lucide-react";
+import { Globe, MapPin, Clock, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DirectorPerformanceChart from "@/components/charts/DirectorPerformanceChart";
+import TimeToFillChart from "@/components/charts/TimeToFillChart";
 import DataTable from "@/components/DataTable";
+import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";
-import { groupBy, toChartPoints, getAverageTimeToFill, getHiredJobs } from "@/lib/metrics";
+import { groupBy, toChartPoints, getAverageTimeToFill } from "@/lib/metrics";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -22,9 +24,22 @@ const Geography = () => {
     avgDays: getAverageTimeToFill(list),
   }));
 
+  const sortedByHired = [...countryStats].sort((a, b) => b.hired - a.hired);
+  const avgConversion =
+    countryStats.length > 0
+      ? Math.round(countryStats.reduce((sum, c) => sum + (c.total > 0 ? (c.hired / c.total) * 100 : 0), 0) / countryStats.length)
+      : 0;
+
   const chartData = toChartPoints(
     countryStats.reduce((acc, { name, hired }) => {
       acc[name] = hired;
+      return acc;
+    }, {} as Record<string, number>)
+  );
+
+  const timeToFillData = toChartPoints(
+    countryStats.reduce((acc, { name, avgDays }) => {
+      acc[name] = avgDays;
       return acc;
     }, {} as Record<string, number>)
   );
@@ -39,16 +54,36 @@ const Geography = () => {
         <p className="text-muted-foreground">Distribuição de contratações por país.</p>
       </motion.div>
 
-      <motion.div variants={staggerItem}>
-        <Card className="shadow-card">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Contratações por País</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <DirectorPerformanceChart data={chartData} />
-          </CardContent>
-        </Card>
-      </motion.div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard label="Países" value={countryStats.length} icon={MapPin} color="primary" delay={0} />
+        <StatCard label="Top País" value={sortedByHired[0]?.name || "—"} icon={Globe} color="accent" delay={1} />
+        <StatCard label="Conversão Média" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
+        <StatCard label="Tempo Médio Geral" value={`${getAverageTimeToFill(jobs)} dias`} icon={Clock} color="primary" delay={3} />
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <motion.div variants={staggerItem}>
+          <Card className="shadow-card">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base font-semibold">Contratações por País</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <DirectorPerformanceChart data={chartData} />
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div variants={staggerItem}>
+          <Card className="shadow-card">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base font-semibold">Tempo Médio por País (dias)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <TimeToFillChart data={timeToFillData} />
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
 
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">

@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
-import { BarChart3 } from "lucide-react";
+import { BarChart3, Building2, Trophy, Clock, Target } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DirectorPerformanceChart from "@/components/charts/DirectorPerformanceChart";
 import TimeToFillChart from "@/components/charts/TimeToFillChart";
 import DataTable from "@/components/DataTable";
+import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";
-import { groupBy, toChartPoints, getAverageTimeToFill, formatDate } from "@/lib/metrics";
+import { groupBy, toChartPoints, getAverageTimeToFill, getSLAAdherence } from "@/lib/metrics";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Job } from "@/types";
 
 const Performance = () => {
   const { data: jobs, isLoading } = useJobs();
@@ -23,6 +23,9 @@ const Performance = () => {
     total: list.length,
     avgDays: getAverageTimeToFill(list),
   }));
+
+  const sortedByHired = [...directorHired].sort((a, b) => b.hired - a.hired);
+  const sortedByTime = [...directorHired].filter((d) => d.avgDays > 0).sort((a, b) => a.avgDays - b.avgDays);
 
   const timeToFillData = toChartPoints(
     directorHired.reduce((acc, { name, avgDays }) => {
@@ -47,6 +50,19 @@ const Performance = () => {
         </h2>
         <p className="text-muted-foreground">Contratações e tempo médio de preenchimento por área.</p>
       </motion.div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard label="Diretorias" value={directorHired.length} icon={Building2} color="primary" delay={0} />
+        <StatCard label="Top Diretoria" value={sortedByHired[0]?.name || "—"} icon={Trophy} color="accent" delay={1} />
+        <StatCard
+          label="Menor Tempo Médio"
+          value={sortedByTime[0] ? `${sortedByTime[0].avgDays} dias` : "—"}
+          icon={Clock}
+          color="primary"
+          delay={2}
+        />
+        <StatCard label="Aderência ao Prazo" value={`${getSLAAdherence(jobs)}%`} icon={Target} color="accent" delay={3} />
+      </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <motion.div variants={staggerItem}>

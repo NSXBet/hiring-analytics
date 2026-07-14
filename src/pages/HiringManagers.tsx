@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { UserCog } from "lucide-react";
+import { UserCog, Users, Clock, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DirectorPerformanceChart from "@/components/charts/DirectorPerformanceChart";
+import TimeToFillChart from "@/components/charts/TimeToFillChart";
 import DataTable from "@/components/DataTable";
+import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";
 import { groupBy, toChartPoints, getAverageTimeToFill } from "@/lib/metrics";
 import { staggerContainer, staggerItem } from "@/lib/animations";
@@ -22,9 +24,22 @@ const HiringManagers = () => {
     avgDays: getAverageTimeToFill(list),
   }));
 
+  const sortedByHired = [...managerStats].sort((a, b) => b.hired - a.hired);
+  const avgConversion =
+    managerStats.length > 0
+      ? Math.round(managerStats.reduce((sum, r) => sum + (r.total > 0 ? (r.hired / r.total) * 100 : 0), 0) / managerStats.length)
+      : 0;
+
   const chartData = toChartPoints(
     managerStats.reduce((acc, { name, hired }) => {
       acc[name] = hired;
+      return acc;
+    }, {} as Record<string, number>)
+  );
+
+  const timeToFillData = toChartPoints(
+    managerStats.reduce((acc, { name, avgDays }) => {
+      acc[name] = avgDays;
       return acc;
     }, {} as Record<string, number>)
   );
@@ -39,16 +54,36 @@ const HiringManagers = () => {
         <p className="text-muted-foreground">Análise de contratações por gestor responsável.</p>
       </motion.div>
 
-      <motion.div variants={staggerItem}>
-        <Card className="shadow-card">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold">Contratações por Hiring Manager</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <DirectorPerformanceChart data={chartData} />
-          </CardContent>
-        </Card>
-      </motion.div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard label="Total de Gestores" value={managerStats.length} icon={Users} color="primary" delay={0} />
+        <StatCard label="Top Gestor" value={sortedByHired[0]?.name || "—"} icon={UserCog} color="accent" delay={1} />
+        <StatCard label="Conversão Média" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
+        <StatCard label="Tempo Médio Geral" value={`${getAverageTimeToFill(jobs)} dias`} icon={Clock} color="primary" delay={3} />
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <motion.div variants={staggerItem}>
+          <Card className="shadow-card">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base font-semibold">Contratações por Hiring Manager</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <DirectorPerformanceChart data={chartData} />
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div variants={staggerItem}>
+          <Card className="shadow-card">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base font-semibold">Tempo Médio por Hiring Manager (dias)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <TimeToFillChart data={timeToFillData} />
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
 
       <motion.div variants={staggerItem}>
         <Card className="shadow-card">
