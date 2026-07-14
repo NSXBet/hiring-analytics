@@ -2,95 +2,158 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Hiring Analytics Dashboard — Design System
+   Google-inspired palette: refined blues, greens, reds and yellows.
+   All colors are HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core surface */
+    --background: 220 14% 96%;
+    --foreground: 220 20% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 20% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 20% 14%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary action — Google blue */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary — soft slate */
+    --secondary: 220 14% 93%;
+    --secondary-foreground: 220 20% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted — neutral gray */
+    --muted: 220 13% 91%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent — Google green */
+    --accent: 137 52% 43%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive — Google red */
+    --destructive: 5 70% 56%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Warning — Google yellow */
+    --warning: 45 97% 50%;
+    --warning-foreground: 220 20% 14%;
 
-    --radius: 0.5rem;
+    /* Borders, inputs, focus rings */
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 217 91% 60%;
 
-    --sidebar-background: 0 0% 98%;
+    --radius: 0.625rem;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 20% 20%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 20% 14%;
+    --sidebar-border: 220 13% 90%;
+    --sidebar-ring: 217 91% 60%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Status palette */
+    --status-hired: 137 52% 43%;
+    --status-interview: 217 91% 60%;
+    --status-offer: 262 52% 56%;
+    --status-kickoff: 199 89% 48%;
+    --status-standby: 45 97% 50%;
+    --status-canceled: 220 9% 46%;
+    --status-turnover: 5 70% 56%;
+    --status-withdrawn: 25 95% 53%;
+    --status-tbd: 220 14% 80%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Directorate palette */
+    --director-product: 217 91% 60%;
+    --director-engineering: 262 52% 56%;
+    --director-data: 199 89% 48%;
+    --director-sales: 137 52% 43%;
+    --director-marketing: 25 95% 53%;
+    --director-people: 330 70% 55%;
+    --director-finance: 45 97% 45%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Chart palette */
+    --chart-1: 217 91% 60%;
+    --chart-2: 137 52% 43%;
+    --chart-3: 5 70% 56%;
+    --chart-4: 45 97% 50%;
+    --chart-5: 262 52% 56%;
+    --chart-6: 199 89% 48%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 220 20% 8%;
+    --foreground: 220 14% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 18% 12%;
+    --card-foreground: 220 14% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 18% 12%;
+    --popover-foreground: 220 14% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 14% 18%;
+    --secondary-foreground: 220 14% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 14% 18%;
+    --muted-foreground: 220 9% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 137 52% 43%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 5 70% 56%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --warning: 45 97% 50%;
+    --warning-foreground: 220 20% 14%;
+
+    --border: 220 14% 20%;
+    --input: 220 14% 20%;
+    --ring: 217 91% 60%;
+
+    --sidebar-background: 220 18% 10%;
+    --sidebar-foreground: 220 14% 96%;
+    --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 220 14% 16%;
+    --sidebar-accent-foreground: 220 14% 96%;
+    --sidebar-border: 220 14% 18%;
+    --sidebar-ring: 217 91% 60%;
+
+    --status-hired: 137 52% 50%;
+    --status-interview: 217 91% 65%;
+    --status-offer: 262 52% 65%;
+    --status-kickoff: 199 89% 55%;
+    --status-standby: 45 97% 55%;
+    --status-canceled: 220 9% 55%;
+    --status-turnover: 5 70% 60%;
+    --status-withdrawn: 25 95% 58%;
+    --status-tbd: 220 14% 55%;
+
+    --director-product: 217 91% 65%;
+    --director-engineering: 262 52% 65%;
+    --director-data: 199 89% 55%;
+    --director-sales: 137 52% 50%;
+    --director-marketing: 25 95% 58%;
+    --director-people: 330 70% 60%;
+    --director-finance: 45 97% 50%;
+
+    --chart-1: 217 91% 65%;
+    --chart-2: 137 52% 50%;
+    --chart-3: 5 70% 60%;
+    --chart-4: 45 97% 55%;
+    --chart-5: 262 52% 65%;
+    --chart-6: 199 89% 55%;
   }
 }
 
@@ -100,6 +163,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
