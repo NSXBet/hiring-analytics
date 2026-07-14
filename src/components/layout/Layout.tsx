@@ -9,6 +9,9 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/hiring-managers": { title: "Hiring Managers", subtitle: "Análise por gestor de contratação" },
   "/geography": { title: "Geography", subtitle: "Distribuição geográfica das vagas" },
   "/diversity": { title: "Diversity", subtitle: "Métricas de diversidade e inclusão" },
+  "/levels": { title: "Levels", subtitle: "Distribuição de contratações por nível e diretoria" },
+  "/contracts": { title: "Contracts", subtitle: "Distribuição por tipo de contrato" },
+  "/contracts-by-directorate": { title: "Contracts by Directorate", subtitle: "Tipo de contrato por diretoria" },
   "/details": { title: "Details", subtitle: "Tabela completa de requisições" },
   "/secondary-status": { title: "Secondary Status", subtitle: "Análise de status secundários" },
 };
