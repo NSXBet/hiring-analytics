@@ -1,10 +1,93 @@
 import { motion } from "framer-motion";
-import { fadeUp } from "@/lib/animations";
+import { AlertCircle } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import DirectorPerformanceChart from "@/components/charts/DirectorPerformanceChart";
+import DataTable from "@/components/DataTable";
+import StatusBadge from "@/components/StatusBadge";
+import { useJobs } from "@/hooks/useJobs";
+import { formatDate } from "@/lib/metrics";
+import { staggerContainer, staggerItem } from "@/lib/animations";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Job } from "@/types";
 
-const SecondaryStatus = () => (
-  <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}>
-    <h2 className="text-2xl font-bold">Secondary Status</h2>
-  </motion.div>
-);
+const SECONDARY_STATUSES = ["Canceled", "Turnover", "Withdrawn", "TBD"] as const;
+
+const SecondaryStatus = () => {
+  const { data: jobs, isLoading } = useJobs();
+
+  if (isLoading || !jobs) {
+    return <Skeleton className="h-96 rounded-xl" />;
+  }
+
+  const secondaryJobs = jobs.filter((j) => SECONDARY_STATUSES.includes(j.status as (typeof SECONDARY_STATUSES)[number]));
+
+  const statusCounts = SECONDARY_STATUSES.reduce((acc, status) => {
+    acc[status] = jobs.filter((j) => j.status === status).length;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const chartData = Object.entries(statusCounts)
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value);
+
+  return (
+    <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
+      <motion.div variants={staggerItem}>
+        <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
+          <AlertCircle className="h-6 w-6 text-primary" />
+          Secondary Status
+        </h2>
+        <p className="text-muted-foreground">Análise de status secundários e desistências.</p>
+      </motion.div>
+
+      <div className="grid gap-4 sm:grid-cols-4">
+        {SECONDARY_STATUSES.map((status) => (
+          <Card key={status} className="shadow-card">
+            <CardContent className="p-5">
+              <p className="text-sm text-muted-foreground">{status}</p>
+              <p className="mt-2 text-3xl font-bold">{statusCounts[status]}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <motion.div variants={staggerItem}>
+        <Card className="shadow-card">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base font-semibold">Distribuição de Status Secundários</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <DirectorPerformanceChart data={chartData} />
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <motion.div variants={staggerItem}>
+        <Card className="shadow-card">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base font-semibold">Requisições com Status Secundário ({secondaryJobs.length})</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <DataTable
+              data={secondaryJobs}
+              keyExtractor={(row) => row.id}
+              columns={[
+                { key: "cod", header: "COD" },
+                { key: "role", header: "Vaga" },
+                { key: "status", header: "Status", render: (row: Job) => <StatusBadge status={row.status} /> },
+                { key: "recruiter", header: "Recruiter" },
+                { key: "hiring_manager", header: "Hiring Manager" },
+                { key: "director", header: "Diretoria" },
+                { key: "country", header: "País" },
+                { key: "opening_date", header: "Abertura", render: (row: Job) => formatDate(row.opening_date) },
+                { key: "closing_date", header: "Fechamento", render: (row: Job) => formatDate(row.closing_date) },
+              ]}
+            />
+          </CardContent>
+        </Card>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export default SecondaryStatus;
