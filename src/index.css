@@ -79,6 +79,14 @@
     --director-marketing: 25 95% 53%;
     --director-people: 330 70% 55%;
     --director-finance: 45 97% 45%;
+    --director-technology: 210 100% 45%;
+    --director-customer-operations: 160 55% 40%;
+    --director-commercial: 280 60% 55%;
+    --director-hr: 340 75% 55%;
+    --director-betfair: 200 80% 45%;
+    --director-operation: 35 90% 50%;
+    --director-legal: 260 50% 50%;
+    --director-unknown: 220 9% 70%;
 
     /* Chart palette */
     --chart-1: 217 91% 60%;
@@ -147,6 +155,14 @@
     --director-marketing: 25 95% 58%;
     --director-people: 330 70% 60%;
     --director-finance: 45 97% 50%;
+    --director-technology: 210 100% 55%;
+    --director-customer-operations: 160 55% 50%;
+    --director-commercial: 280 60% 65%;
+    --director-hr: 340 75% 60%;
+    --director-betfair: 200 80% 55%;
+    --director-operation: 35 90% 55%;
+    --director-legal: 260 50% 60%;
+    --director-unknown: 220 9% 60%;
 
     --chart-1: 217 91% 65%;
     --chart-2: 137 52% 50%;
