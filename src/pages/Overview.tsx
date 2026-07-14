@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, Users, Clock, CheckCircle2, AlertCircle, Target, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import StatCard from "@/components/StatCard";
-import TimeToFillChart from "@/components/charts/TimeToFillChart";
+import SimpleBarChart from "@/components/charts/SimpleBarChart";
 import StatusDistributionChart from "@/components/charts/StatusDistributionChart";
 import HiringTrendChart from "@/components/charts/HiringTrendChart";
 import { useJobs } from "@/hooks/useJobs";

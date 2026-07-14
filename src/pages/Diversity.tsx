@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { PieChart, Users, UserCheck, Percent } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import StatusDistributionChart from "@/components/charts/StatusDistributionChart";
-import DirectorPerformanceChart from "@/components/charts/DirectorPerformanceChart";
+import SimpleBarChart from "@/components/charts/SimpleBarChart";
 import DataTable from "@/components/DataTable";
 import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";

@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { UserCog, Users, Clock, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DirectorPerformanceChart from "@/components/charts/DirectorPerformanceChart";
-import TimeToFillChart from "@/components/charts/TimeToFillChart";
+import SimpleBarChart from "@/components/charts/SimpleBarChart";
 import DataTable from "@/components/DataTable";
 import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";

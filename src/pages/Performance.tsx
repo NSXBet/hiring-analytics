@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { BarChart3, Building2, Trophy, Clock, Target } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import DirectorPerformanceChart from "@/components/charts/DirectorPerformanceChart";
-import TimeToFillChart from "@/components/charts/TimeToFillChart";
+import SimpleBarChart from "@/components/charts/SimpleBarChart";
+import { DIRECTOR_COLORS } from "@/lib/constants";
 import DataTable from "@/components/DataTable";
 import StatCard from "@/components/StatCard";
 import { useJobs } from "@/hooks/useJobs";
