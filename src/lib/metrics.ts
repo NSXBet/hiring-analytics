@@ -61,7 +61,33 @@ export const toChartPoints = (record: Record<string, number>): ChartPoint[] =>
     .map(([name, value]) => ({ name, value }))
     .sort((a, b) => b.value - a.value);
 
-export const getMonthlyTrend = (jobs: Job[]): ChartPoint[] => {
+const MONTH_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+const fillMonthlyHires = (data: ChartPoint[], year: number): ChartPoint[] => {
+  const map = new Map(data.map((d) => [d.name, d.value]));
+  return MONTH_LABELS.map((month) => ({
+    name: `${month}/${String(year).slice(-2)}`,
+    value: map.get(`${month}/${String(year).slice(-2)}`) || 0,
+  }));
+};
+
+const fillMonthlyTrend = (
+  data: { name: string; opened: number; hired: number }[],
+  year: number
+): { name: string; opened: number; hired: number }[] => {
+  const map = new Map(data.map((d) => [d.name, d]));
+  return MONTH_LABELS.map((month) => {
+    const key = `${month}/${String(year).slice(-2)}`;
+    const existing = map.get(key);
+    return {
+      name: key,
+      opened: existing?.opened ?? 0,
+      hired: existing?.hired ?? 0,
+    };
+  });
+};
+
+export const getMonthlyTrend = (jobs: Job[], year: number): { name: string; opened: number; hired: number }[] => {
   const counts = new Map<string, { opened: number; hired: number; date: Date }>();
 
   jobs.forEach((job) => {
@@ -72,9 +98,8 @@ export const getMonthlyTrend = (jobs: Job[]): ChartPoint[] => {
       current.opened++;
       counts.set(key, current);
     }
-    const refDate = (job as Job & { referenceDate?: string | null }).referenceDate || job.closing_date;
-    if (refDate && job.status === "Hired") {
-      const date = parseISO(refDate);
+    if (job.closing_date && job.status === "Hired") {
+      const date = parseISO(job.closing_date);
       const key = format(date, "MMM/yy");
       const current = counts.get(key) || { opened: 0, hired: 0, date };
       current.hired++;
@@ -82,9 +107,11 @@ export const getMonthlyTrend = (jobs: Job[]): ChartPoint[] => {
     }
   });
 
-  return Array.from(counts.entries())
+  const data = Array.from(counts.entries())
     .sort((a, b) => a[1].date.getTime() - b[1].date.getTime())
     .map(([name, { opened, hired }]) => ({ name, opened, hired }));
+
+  return fillMonthlyTrend(data, year);
 };
 
 export const getTotalJobs = (jobs: Job[]) => jobs.length;
@@ -101,13 +128,12 @@ export const getStatusCounts = (jobs: Job[]): ChartPoint[] =>
     .map(([name, value]) => ({ name, value }))
     .sort((a, b) => b.value - a.value);
 
-export const getMonthlyHires = (jobs: Job[]): ChartPoint[] => {
+export const getMonthlyHires = (jobs: Job[], year: number): ChartPoint[] => {
   const counts = new Map<string, { value: number; date: Date }>();
 
   jobs.forEach((job) => {
-    const refDate = (job as Job & { referenceDate?: string | null }).referenceDate || job.closing_date;
-    if (refDate && job.status === "Hired") {
-      const date = parseISO(refDate);
+    if (job.closing_date && job.status === "Hired") {
+      const date = parseISO(job.closing_date);
       const key = format(date, "MMM/yy");
       const current = counts.get(key) || { value: 0, date };
       current.value++;
@@ -115,9 +141,11 @@ export const getMonthlyHires = (jobs: Job[]): ChartPoint[] => {
     }
   });
 
-  return Array.from(counts.entries())
+  const data = Array.from(counts.entries())
     .sort((a, b) => a[1].date.getTime() - b[1].date.getTime())
     .map(([name, { value }]) => ({ name, value }));
+
+  return fillMonthlyHires(data, year);
 };
 
 export const formatDate = (date: string | null) => (date ? format(parseISO(date), "dd/MM/yyyy") : "—");
