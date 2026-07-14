@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import * as framer from "framer-motion";
 import { useJobs } from "@/hooks/useJobs";
 import { getTotalJobs } from "@/lib/metrics";
 
@@ -9,10 +9,12 @@ const Overview = () => {
     return <div>Loading...</div>;
   }
 
+  console.log("framer-motion module:", framer);
+
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4">
+    <div className="p-4">
       <div className="bg-blue-100 p-4 rounded">Total jobs: {getTotalJobs(jobs)}</div>
-    </motion.div>
+    </div>
   );
 };
 
