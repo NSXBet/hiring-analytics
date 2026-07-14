@@ -15,6 +15,6 @@ export const useJobs = (year?: number) =>
     queryFn: async () => {
       const jobs = await fetchJobs();
       if (!year) return jobs;
-      return jobs.filter((job) => getJobYear(job) === year);
+      return jobs.filter((job) => job.status === "Hired" && getJobYear(job) === year);
     },
   });
