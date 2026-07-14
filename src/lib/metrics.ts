@@ -98,9 +98,8 @@ export const getMonthlyTrend = (jobs: Job[], year: number): { name: string; open
       current.opened++;
       counts.set(key, current);
     }
-    const effectiveClosing = getEffectiveClosingDate(job, year);
-    if (effectiveClosing) {
-      const date = parseISO(effectiveClosing);
+    if (job.closing_date) {
+      const date = parseISO(job.closing_date);
       const key = format(date, "MMM/yy");
       const current = counts.get(key) || { opened: 0, hired: 0, date };
       current.hired++;
