@@ -21,7 +21,7 @@ const Layout = () => {
     <div className="min-h-screen bg-background">
       <AppSidebar />
       <div className="lg:pl-64 min-h-screen flex flex-col">
-        <Header title={`${title} [path=${location.pathname} hash=${location.hash}]`} subtitle={subtitle} />
+        <Header title={title} subtitle={subtitle} />
         <main className="flex-1 p-4 sm:p-6 lg:p-8">
           <Outlet />
         </main>
