@@ -92,3 +92,5 @@ export const getMonthlyHires = (jobs: Job[]): ChartPoint[] => {
 
   return months.map((name, i) => ({ name, value: hired[i] }));
 };
+
+export const formatDate = (date: string | null) => (date ? format(parseISO(date), "dd/MM/yyyy") : "—");
