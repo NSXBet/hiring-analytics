@@ -21,6 +21,7 @@ export interface Job {
   cost_center: string;
   squad: string | null;
   level: string | null;
+  type_of_contract: string | null;
   opening_date: string | null;
   closing_date: string | null;
   committed_date: string | null;
