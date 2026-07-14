@@ -1,22 +1,32 @@
-import { useJobs } from "@/hooks/useJobs";
+import { useEffect, useState } from "react";
 
 const Overview = () => {
-  const { data: jobs, isLoading, error } = useJobs();
+  const [result, setResult] = useState<string>("Iniciando...");
 
-  console.log("Overview render", { isLoading, error, count: jobs?.length });
-
-  if (isLoading) return <div className="p-8 text-center">Carregando...</div>;
-  if (error) return <div className="p-8 text-center text-destructive">Erro: {error.message}</div>;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/jobs?select=*&limit=5`;
+        setResult(`URL: ${url}`);
+        const response = await fetch(url, {
+          headers: {
+            apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+        });
+        const text = await response.text();
+        setResult((prev) => `${prev}\nStatus: ${response.status}\nBody: ${text.slice(0, 200)}`);
+      } catch (err) {
+        setResult((prev) => `${prev}\nErro: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Overview</h2>
-      <p>Total de vagas: {jobs?.length || 0}</p>
-      <ul className="space-y-1">
-        {jobs?.slice(0, 5).map((job) => (
-          <li key={job.id} className="text-sm">{job.role} - {job.status}</li>
-        ))}
-      </ul>
+      <h2 className="text-2xl font-bold">Overview Debug</h2>
+      <pre className="whitespace-pre-wrap rounded-md bg-muted p-4 text-xs">{result}</pre>
     </div>
   );
 };
