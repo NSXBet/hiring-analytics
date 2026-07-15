@@ -72,9 +72,9 @@ const fillMonthlyHires = (data: ChartPoint[], year: number): ChartPoint[] => {
 };
 
 const fillMonthlyTrend = (
-  data: { name: string; opened: number; hired: number }[],
+  data: { name: string; opened: number; offerAccepted: number }[],
   year: number
-): { name: string; opened: number; hired: number }[] => {
+): { name: string; opened: number; offerAccepted: number }[] => {
   const map = new Map(data.map((d) => [d.name, d]));
   return MONTH_LABELS.map((month) => {
     const key = `${month}/${String(year).slice(-2)}`;
@@ -82,34 +82,34 @@ const fillMonthlyTrend = (
     return {
       name: key,
       opened: existing?.opened ?? 0,
-      hired: existing?.hired ?? 0,
+      offerAccepted: existing?.offerAccepted ?? 0,
     };
   });
 };
 
-export const getMonthlyTrend = (jobs: Job[], year: number): { name: string; opened: number; hired: number }[] => {
-  const counts = new Map<string, { opened: number; hired: number; date: Date }>();
+export const getMonthlyTrend = (jobs: Job[], year: number): { name: string; opened: number; offerAccepted: number }[] => {
+  const counts = new Map<string, { opened: number; offerAccepted: number; date: Date }>();
 
   jobs.forEach((job) => {
     if (job.opening_date) {
       const date = parseISO(job.opening_date);
       const key = format(date, "MMM/yy");
-      const current = counts.get(key) || { opened: 0, hired: 0, date };
+      const current = counts.get(key) || { opened: 0, offerAccepted: 0, date };
       current.opened++;
       counts.set(key, current);
     }
     if (job.closing_date) {
       const date = parseISO(job.closing_date);
       const key = format(date, "MMM/yy");
-      const current = counts.get(key) || { opened: 0, hired: 0, date };
-      current.hired++;
+      const current = counts.get(key) || { opened: 0, offerAccepted: 0, date };
+      current.offerAccepted++;
       counts.set(key, current);
     }
   });
 
   const data = Array.from(counts.entries())
     .sort((a, b) => a[1].date.getTime() - b[1].date.getTime())
-    .map(([name, { opened, hired }]) => ({ name, opened, hired }));
+    .map(([name, { opened, offerAccepted }]) => ({ name, opened, offerAccepted }));
 
   return fillMonthlyTrend(data, year);
 };
