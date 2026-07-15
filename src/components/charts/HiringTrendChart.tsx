@@ -3,11 +3,11 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { ChartPoint } from "@/types";
 
 interface HiringTrendChartProps {
-  data: ChartPoint[];
+  data: { name: string; opened: number; offerAccepted: number }[];
 }
 
 const chartConfig = {
-  hired: { label: "Hired", color: "hsl(var(--chart-2))" },
+  offerAccepted: { label: "Offer Accepted", color: "hsl(var(--chart-2))" },
   opened: { label: "Open", color: "hsl(var(--chart-1))" },
 };
 
@@ -27,7 +27,7 @@ const HiringTrendChart = ({ data }: HiringTrendChartProps) => (
       />
       <YAxis tickLine={false} axisLine={false} tickMargin={8} allowDecimals={false} />
       <ChartTooltip content={<ChartTooltipContent />} />
-      <Line type="monotone" dataKey="hired" stroke="var(--color-hired)" strokeWidth={2.5} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+      <Line type="monotone" dataKey="offerAccepted" stroke="var(--color-offerAccepted)" strokeWidth={2.5} dot={{ r: 3 }} activeDot={{ r: 5 }} />
       <Line type="monotone" dataKey="opened" stroke="var(--color-opened)" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="4 4" />
     </LineChart>
   </ChartContainer>
