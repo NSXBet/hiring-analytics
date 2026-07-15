@@ -98,11 +98,11 @@ const Recruiters = () => {
               columns={[
                 { key: "name", header: "Recruiter" },
                 { key: "total", header: "Jobs" },
-                { key: "hired", header: "Hired" },
+                { key: "offerAccepted", header: "Offer Accepted" },
                 {
                   key: "conversion",
                   header: "Conversion",
-                  render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
+                  render: (row) => `${row.total > 0 ? Math.round((row.offerAccepted / row.total) * 100) : 0}%`,
                 },
                 { key: "avgDays", header: "Average Time (days)" },
               ]}
