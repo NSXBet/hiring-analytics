@@ -57,7 +57,7 @@ const Recruiters = () => {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Total Recruiters" value={recruiterStats.length} icon={Users} color="primary" delay={0} />
-        <StatCard label="Top Recruiter" value={sortedByHired[0]?.name || "—"} icon={UserCheck} color="accent" delay={1} />
+        <StatCard label="Top Recruiter" value={sortedByOfferAccepted[0]?.name || "—"} icon={UserCheck} color="accent" delay={1} />
         <StatCard label="Average Conversion" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
         <StatCard label="Overall Average Time" value={`${getAverageTimeToFill(jobs)} days`} icon={Clock} color="primary" delay={3} />
       </div>
