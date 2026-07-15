@@ -50,7 +50,7 @@ const Diversity = () => {
           <PieChart className="h-6 w-6 text-primary" />
           Diversity
         </h2>
-        <p className="text-muted-foreground">Candidates and hires distribution by gender.</p>
+        <p className="text-muted-foreground">Candidates and offers accepted distribution by gender.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -68,8 +68,8 @@ const Diversity = () => {
           color="accent"
           delay={1}
         />
-        <StatCard label="Women Hired" value={femaleCount} icon={UserCheck} color="primary" delay={2} />
-        <StatCard label="Men Hired" value={maleCount} icon={UserCheck} color="accent" delay={3} />
+        <StatCard label="Women Offer Accepted" value={femaleCount} icon={UserCheck} color="primary" delay={2} />
+        <StatCard label="Men Offer Accepted" value={maleCount} icon={UserCheck} color="accent" delay={3} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
