@@ -3,7 +3,7 @@ export type JobStatus =
   | "Offer"
   | "Kick off"
   | "Stand By"
-  | "Hired"
+  | "Offer Accepted"
   | "Canceled"
   | "Turnover"
   | "Withdrawn"
