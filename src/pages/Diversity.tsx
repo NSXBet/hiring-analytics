@@ -22,7 +22,7 @@ const Diversity = () => {
   const genderStats = Object.entries(groupBy(jobs, "gender")).map(([name, list]) => ({
     name: name === "null" ? "Not informed" : name,
     total: list.length,
-    hired: list.filter((j) => j.status === "Hired").length,
+    offerAccepted: list.filter((j) => j.status === "Offer Accepted").length,
   }));
 
   const totalKnown = jobs.filter((j) => j.gender && j.gender !== "Prefer not to say").length;
@@ -36,9 +36,9 @@ const Diversity = () => {
     }, {} as Record<string, number>)
   );
 
-  const hiredByGender = toChartPoints(
-    genderStats.reduce((acc, { name, hired }) => {
-      acc[name] = hired;
+  const offerAcceptedByGender = toChartPoints(
+    genderStats.reduce((acc, { name, offerAccepted }) => {
+      acc[name] = offerAccepted;
       return acc;
     }, {} as Record<string, number>)
   );
