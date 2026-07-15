@@ -21,21 +21,21 @@ const HiringManagers = () => {
   const managerStats = Object.entries(groupBy(jobs, "hiring_manager")).map(([name, list]) => ({
     name,
     total: list.length,
-    hired: list.filter((j) => j.status === "Hired").length,
+    offerAccepted: list.filter((j) => j.status === "Offer Accepted").length,
     avgDays: getAverageTimeToFill(list),
   }));
 
-  const sortedByHired = [...managerStats].sort((a, b) => b.hired - a.hired);
+  const sortedByOfferAccepted = [...managerStats].sort((a, b) => b.offerAccepted - a.offerAccepted);
   const avgConversion =
     managerStats.length > 0
-      ? Math.round(managerStats.reduce((sum, r) => sum + (r.total > 0 ? (r.hired / r.total) * 100 : 0), 0) / managerStats.length)
+      ? Math.round(managerStats.reduce((sum, r) => sum + (r.total > 0 ? (r.offerAccepted / r.total) * 100 : 0), 0) / managerStats.length)
       : 0;
 
-  const topManagers = [...managerStats].sort((a, b) => b.hired - a.hired).slice(0, 15);
+  const topManagers = [...managerStats].sort((a, b) => b.offerAccepted - a.offerAccepted).slice(0, 15);
 
   const chartData = toChartPoints(
-    topManagers.reduce((acc, { name, hired }) => {
-      acc[name] = hired;
+    topManagers.reduce((acc, { name, offerAccepted }) => {
+      acc[name] = offerAccepted;
       return acc;
     }, {} as Record<string, number>)
   );
@@ -59,7 +59,7 @@ const HiringManagers = () => {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Total Managers" value={managerStats.length} icon={Users} color="primary" delay={0} />
-        <StatCard label="Top Manager" value={sortedByHired[0]?.name || "—"} icon={UserCog} color="accent" delay={1} />
+        <StatCard label="Top Manager" value={sortedByOfferAccepted[0]?.name || "—"} icon={UserCog} color="accent" delay={1} />
         <StatCard label="Average Conversion" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
         <StatCard label="Overall Average Time" value={`${getAverageTimeToFill(jobs)} days`} icon={Clock} color="primary" delay={3} />
       </div>
@@ -68,10 +68,10 @@ const HiringManagers = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Top 15 Hiring Managers - Hires</CardTitle>
+              <CardTitle className="text-base font-semibold">Top 15 Hiring Managers - Offers Accepted</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={chartData} label="Hires" orientation="horizontal" />
+              <SimpleBarChart data={chartData} label="Offers Accepted" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
@@ -100,11 +100,11 @@ const HiringManagers = () => {
               columns={[
                 { key: "name", header: "Hiring Manager" },
                 { key: "total", header: "Jobs" },
-                { key: "hired", header: "Hired" },
+                { key: "offerAccepted", header: "Offer Accepted" },
                 {
                   key: "conversion",
                   header: "Conversion",
-                  render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
+                  render: (row) => `${row.total > 0 ? Math.round((row.offerAccepted / row.total) * 100) : 0}%`,
                 },
                 { key: "avgDays", header: "Average Time (days)" },
               ]}
