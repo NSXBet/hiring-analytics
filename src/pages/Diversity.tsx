@@ -108,16 +108,16 @@ const Diversity = () => {
               columns={[
                 { key: "name", header: "Gender" },
                 { key: "total", header: "Total" },
-                { key: "hired", header: "Hired" },
+                { key: "offerAccepted", header: "Offer Accepted" },
                 {
                   key: "share",
                   header: "Representation",
                   render: (row) => `${jobs.length > 0 ? Math.round((row.total / jobs.length) * 100) : 0}%`,
                 },
                 {
-                  key: "hiredRate",
-                  header: "Hire Rate",
-                  render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
+                  key: "offerAcceptedRate",
+                  header: "Offer Acceptance Rate",
+                  render: (row) => `${row.total > 0 ? Math.round((row.offerAccepted / row.total) * 100) : 0}%`,
                 },
               ]}
             />
