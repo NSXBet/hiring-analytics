@@ -19,26 +19,26 @@ const Performance = () => {
     return <Skeleton className="h-96 rounded-xl" />;
   }
 
-  const directorHired = Object.entries(groupBy(jobs, "director")).map(([name, list]) => ({
+  const directorOfferAccepted = Object.entries(groupBy(jobs, "director")).map(([name, list]) => ({
     name,
-    hired: list.filter((j) => j.status === "Hired").length,
+    offerAccepted: list.filter((j) => j.status === "Offer Accepted").length,
     total: list.length,
     avgDays: getAverageTimeToFill(list),
   }));
 
-  const sortedByHired = [...directorHired].sort((a, b) => b.hired - a.hired);
-  const sortedByTime = [...directorHired].filter((d) => d.avgDays > 0).sort((a, b) => a.avgDays - b.avgDays);
+  const sortedByOfferAccepted = [...directorOfferAccepted].sort((a, b) => b.offerAccepted - a.offerAccepted);
+  const sortedByTime = [...directorOfferAccepted].filter((d) => d.avgDays > 0).sort((a, b) => a.avgDays - b.avgDays);
 
   const timeToFillData = toChartPoints(
-    directorHired.reduce((acc, { name, avgDays }) => {
+    directorOfferAccepted.reduce((acc, { name, avgDays }) => {
       acc[name] = avgDays;
       return acc;
     }, {} as Record<string, number>)
   );
 
   const chartData = toChartPoints(
-    directorHired.reduce((acc, { name, hired }) => {
-      acc[name] = hired;
+    directorOfferAccepted.reduce((acc, { name, offerAccepted }) => {
+      acc[name] = offerAccepted;
       return acc;
     }, {} as Record<string, number>)
   );
@@ -50,12 +50,12 @@ const Performance = () => {
           <BarChart3 className="h-6 w-6 text-primary" />
           Performance by Directorate
         </h2>
-        <p className="text-muted-foreground">Hires and average time to fill by area.</p>
+        <p className="text-muted-foreground">Offers Accepted and average time to fill by area.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Directorates" value={directorHired.length} icon={Building2} color="primary" delay={0} />
-        <StatCard label="Top Directorate" value={sortedByHired[0]?.name || "—"} icon={Trophy} color="accent" delay={1} />
+        <StatCard label="Directorates" value={directorOfferAccepted.length} icon={Building2} color="primary" delay={0} />
+        <StatCard label="Top Directorate" value={sortedByOfferAccepted[0]?.name || "—"} icon={Trophy} color="accent" delay={1} />
         <StatCard
           label="Lowest Average Time"
           value={sortedByTime[0] ? `${sortedByTime[0].avgDays} days` : "—"}
@@ -70,10 +70,10 @@ const Performance = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Hires by Directorate</CardTitle>
+              <CardTitle className="text-base font-semibold">Offers Accepted by Directorate</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={chartData} label="Hires" colorMap={DIRECTOR_COLORS} />
+              <SimpleBarChart data={chartData} label="Offers Accepted" colorMap={DIRECTOR_COLORS} />
             </CardContent>
           </Card>
         </motion.div>
@@ -97,16 +97,16 @@ const Performance = () => {
           </CardHeader>
           <CardContent>
             <DataTable
-              data={directorHired}
+              data={directorOfferAccepted}
               keyExtractor={(row) => row.name}
               columns={[
                 { key: "name", header: "Directorate" },
                 { key: "total", header: "Total Jobs" },
-                { key: "hired", header: "Hired" },
+                { key: "offerAccepted", header: "Offer Accepted" },
                 {
                   key: "conversion",
                   header: "Conversion",
-                  render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
+                  render: (row) => `${row.total > 0 ? Math.round((row.offerAccepted / row.total) * 100) : 0}%`,
                 },
                 { key: "avgDays", header: "Average Time (days)" },
               ]}
