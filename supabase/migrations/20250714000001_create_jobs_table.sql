@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS jobs (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   cod TEXT NOT NULL,
   role TEXT NOT NULL,
-  status TEXT NOT NULL CHECK (status IN ('Interview', 'Offer', 'Kick off', 'Stand By', 'Hired', 'Canceled', 'Turnover', 'Withdrawn', 'TBD')),
+  status TEXT NOT NULL CHECK (status IN ('Interview', 'Offer', 'Kick off', 'Stand By', 'Offer Accepted', 'Canceled', 'Turnover', 'Withdrawn', 'TBD')),
   recruiter TEXT NOT NULL,
   hiring_manager TEXT NOT NULL,
   director TEXT NOT NULL,
