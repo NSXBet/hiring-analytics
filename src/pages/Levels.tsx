@@ -18,9 +18,9 @@ const Levels = () => {
     return <Skeleton className="h-96 rounded-xl" />;
   }
 
-  const hired = jobs.filter((j) => j.status === "Hired");
+  const offerAccepted = jobs.filter((j) => j.status === "Offer Accepted");
 
-  const levelCounts = Object.entries(groupBy(hired, "level")).map(([name, list]) => ({
+  const levelCounts = Object.entries(groupBy(offerAccepted, "level")).map(([name, list]) => ({
     name: name === "null" ? "N/A" : name,
     value: list.length,
   }));
@@ -32,12 +32,12 @@ const Levels = () => {
     }, {} as Record<string, number>)
   );
 
-  const directors = Array.from(new Set(hired.map((j) => j.director))).sort();
-  const levels = Array.from(new Set(hired.map((j) => j.level || "N/A"))).sort();
+  const directors = Array.from(new Set(offerAccepted.map((j) => j.director))).sort();
+  const levels = Array.from(new Set(offerAccepted.map((j) => j.level || "N/A"))).sort();
 
   const matrix = directors.map((director) => {
     const row: Record<string, number | string> = { director };
-    const directorJobs = hired.filter((j) => j.director === director);
+    const directorJobs = offerAccepted.filter((j) => j.director === director);
     levels.forEach((level) => {
       row[level] = directorJobs.filter((j) => (j.level || "N/A") === level).length;
     });
@@ -58,12 +58,12 @@ const Levels = () => {
           <Layers className="h-6 w-6 text-primary" />
           Levels
         </h2>
-        <p className="text-muted-foreground">Hires distribution by level and directorate.</p>
+        <p className="text-muted-foreground">Offer Accepted distribution by level and directorate.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Distinct Levels" value={levels.length} icon={Layers} color="primary" delay={0} />
-        <StatCard label="Total Hired" value={hired.length} icon={BarChart3} color="accent" delay={1} />
+        <StatCard label="Total Offer Accepted" value={offerAccepted.length} icon={BarChart3} color="accent" delay={1} />
         <StatCard label="Directorates" value={directors.length} icon={Building2} color="primary" delay={2} />
         <StatCard
           label="Most Common Level"
@@ -78,10 +78,10 @@ const Levels = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Hires by Level</CardTitle>
+              <CardTitle className="text-base font-semibold">Offer Accepted by Level</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={levelChartData} label="Hires" />
+              <SimpleBarChart data={levelChartData} label="Offer Accepted" />
             </CardContent>
           </Card>
         </motion.div>
@@ -103,7 +103,7 @@ const Levels = () => {
                   .filter((d) => d.value > 0)
                   .sort((a, b) => b.value - a.value)
                   .slice(0, 10)}
-                label="Hires"
+                label="Offer Accepted"
                 orientation="horizontal"
               />
             </CardContent>
