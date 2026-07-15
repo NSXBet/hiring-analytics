@@ -9,7 +9,7 @@ import { useJobs } from "@/hooks/useJobs";
 import { useSelectedYear } from "@/contexts/YearContext";
 import {
   getTotalJobs,
-  getHiredJobs,
+  getOfferAcceptedJobs,
   getOpenJobs,
   getAverageTimeToFill,
   getStatusCounts,
@@ -72,7 +72,7 @@ const Overview = () => {
   }
 
   const statusCounts = getStatusCounts(jobs);
-  const hiredCount = getHiredJobs(jobs).length;
+  const offerAcceptedCount = getOfferAcceptedJobs(jobs).length;
   const openCount = getOpenJobs(jobs).length;
   const avgDays = getAverageTimeToFill(jobs);
   const monthlyHires = getMonthlyHires(jobs, selectedYear);
