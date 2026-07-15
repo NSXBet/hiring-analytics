@@ -155,12 +155,12 @@ const Contracts = () => {
                   columns={[
                     { key: "name", header: "Contract Type" },
                     { key: "total", header: "Total" },
-                    { key: "hired", header: "Hired" },
+                    { key: "offerAccepted", header: "Offer Accepted" },
                     {
                       key: "share",
                       header: "Share",
                       render: (row) =>
-                        `${hired.length > 0 ? Math.round((row.total / hired.length) * 100) : 0}%`,
+                        `${offerAccepted.length > 0 ? Math.round((row.total / offerAccepted.length) * 100) : 0}%`,
                     },
                   ]}
                 />
