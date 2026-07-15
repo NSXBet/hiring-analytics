@@ -5,7 +5,7 @@ export const JOB_STATUSES: JobStatus[] = [
   "Offer",
   "Kick off",
   "Stand By",
-  "Hired",
+  "Offer Accepted",
   "Canceled",
   "Turnover",
   "Withdrawn",
@@ -14,10 +14,10 @@ export const JOB_STATUSES: JobStatus[] = [
 
 export const ACTIVE_STATUSES: JobStatus[] = ["Interview", "Offer", "Kick off", "Stand By"];
 
-export const CLOSED_STATUSES: JobStatus[] = ["Hired", "Canceled", "Turnover", "Withdrawn", "TBD"];
+export const CLOSED_STATUSES: JobStatus[] = ["Offer Accepted", "Canceled", "Turnover", "Withdrawn", "TBD"];
 
 export const STATUS_COLORS: Record<JobStatus, string> = {
-  Hired: "hsl(var(--status-hired))",
+  "Offer Accepted": "hsl(var(--status-hired))",
   Interview: "hsl(var(--status-interview))",
   Offer: "hsl(var(--status-offer))",
   "Kick off": "hsl(var(--status-kickoff))",
@@ -29,7 +29,7 @@ export const STATUS_COLORS: Record<JobStatus, string> = {
 };
 
 export const STATUS_LABELS: Record<JobStatus, string> = {
-  Hired: "Hired",
+  "Offer Accepted": "Offer Accepted",
   Interview: "Interview",
   Offer: "Offer",
   "Kick off": "Kick off",
