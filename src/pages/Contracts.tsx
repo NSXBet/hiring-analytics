@@ -127,10 +127,10 @@ const Contracts = () => {
             <div className="grid gap-6 lg:grid-cols-2">
               <Card className="shadow-card">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base font-semibold">Hires by Contract Type</CardTitle>
+                  <CardTitle className="text-base font-semibold">Offers Accepted by Contract Type</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <SimpleBarChart data={chartData} label="Hires" />
+                  <SimpleBarChart data={chartData} label="Offers Accepted" />
                 </CardContent>
               </Card>
 
