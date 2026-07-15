@@ -19,9 +19,9 @@ const isFutureDate = (dateString: string | null | undefined): boolean => {
 
 /**
  * Filters jobs that belong to a given year based on the business rule:
- * - Hired jobs: year is determined by closing_date (Quando Fechamos).
+ * - Offer Accepted jobs: year is determined by closing_date (Quando Fechamos).
  * - For the current year, future closing dates are excluded.
- * - Non-hired jobs: year is determined by opening_date.
+ * - Non-offer-accepted jobs: year is determined by opening_date.
  */
 export const filterJobsByYear = (jobs: Job[] | undefined, year: number): Job[] => {
   if (!jobs) return [];
@@ -29,7 +29,7 @@ export const filterJobsByYear = (jobs: Job[] | undefined, year: number): Job[] =
   const currentYear = new Date().getFullYear();
 
   return jobs.filter((job) => {
-    if (job.status === "Hired") {
+    if (job.status === "Offer Accepted") {
       const closingYear = getYear(job.closing_date);
       if (closingYear !== year) return false;
       if (year === currentYear && isFutureDate(job.closing_date)) return false;
