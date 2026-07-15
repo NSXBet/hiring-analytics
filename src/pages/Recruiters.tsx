@@ -21,19 +21,19 @@ const Recruiters = () => {
   const recruiterStats = Object.entries(groupBy(jobs, "recruiter")).map(([name, list]) => ({
     name,
     total: list.length,
-    hired: list.filter((j) => j.status === "Hired").length,
+    offerAccepted: list.filter((j) => j.status === "Offer Accepted").length,
     avgDays: getAverageTimeToFill(list),
   }));
 
-  const sortedByHired = [...recruiterStats].sort((a, b) => b.hired - a.hired);
+  const sortedByOfferAccepted = [...recruiterStats].sort((a, b) => b.offerAccepted - a.offerAccepted);
   const avgConversion =
     recruiterStats.length > 0
-      ? Math.round(recruiterStats.reduce((sum, r) => sum + (r.total > 0 ? (r.hired / r.total) * 100 : 0), 0) / recruiterStats.length)
+      ? Math.round(recruiterStats.reduce((sum, r) => sum + (r.total > 0 ? (r.offerAccepted / r.total) * 100 : 0), 0) / recruiterStats.length)
       : 0;
 
   const chartData = toChartPoints(
-    recruiterStats.reduce((acc, { name, hired }) => {
-      acc[name] = hired;
+    recruiterStats.reduce((acc, { name, offerAccepted }) => {
+      acc[name] = offerAccepted;
       return acc;
     }, {} as Record<string, number>)
   );
