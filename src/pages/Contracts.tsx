@@ -92,7 +92,7 @@ const Contracts = () => {
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total Hired" value={hired.length} icon={Users} color="primary" delay={0} />
+        <StatCard label="Total Offer Accepted" value={offerAccepted.length} icon={Users} color="primary" delay={0} />
         <StatCard
           label="CLT"
           value={contractCounts.find((c) => c.raw === "CLT")?.total || 0}
