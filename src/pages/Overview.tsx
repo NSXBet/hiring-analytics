@@ -92,7 +92,7 @@ const Overview = () => {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Total Jobs" value={getTotalJobs(jobs)} icon={Users} color="primary" delay={0} />
-        <StatCard label="Hired" value={hiredCount} icon={CheckCircle2} color="accent" delay={1} />
+        <StatCard label="Offer Accepted" value={offerAcceptedCount} icon={CheckCircle2} color="accent" delay={1} />
         <StatCard label="Open Jobs" value={openCount} icon={AlertCircle} color="warning" delay={2} />
         <StatCard label="Average Time to Fill" value={`${avgDays} days`} icon={Clock} color="primary" delay={3} />
       </div>
