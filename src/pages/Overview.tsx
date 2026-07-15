@@ -117,10 +117,10 @@ const Overview = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Hires by Month</CardTitle>
+              <CardTitle className="text-base font-semibold">Offers Accepted by Month</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={monthlyHires} label="Hires" />
+              <SimpleBarChart data={monthlyHires} label="Offers Accepted" />
             </CardContent>
           </Card>
         </motion.div>
