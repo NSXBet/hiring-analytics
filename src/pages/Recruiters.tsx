@@ -66,10 +66,10 @@ const Recruiters = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Hires by Recruiter</CardTitle>
+              <CardTitle className="text-base font-semibold">Offers Accepted by Recruiter</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={chartData} label="Hires" orientation="horizontal" />
+              <SimpleBarChart data={chartData} label="Offers Accepted" orientation="horizontal" />
             </CardContent>
           </Card>
         </motion.div>
