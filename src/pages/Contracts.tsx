@@ -33,13 +33,13 @@ const Contracts = () => {
     return <Skeleton className="h-96 rounded-xl" />;
   }
 
-  const hired = jobs.filter((j) => j.status === "Hired");
+  const offerAccepted = jobs.filter((j) => j.status === "Offer Accepted");
 
-  const contractCounts = Object.entries(groupBy(hired, "type_of_contract")).map(([name, list]) => ({
+  const contractCounts = Object.entries(groupBy(offerAccepted, "type_of_contract")).map(([name, list]) => ({
     name: CONTRACT_LABELS[name] || name,
     raw: name,
     total: list.length,
-    hired: list.filter((j) => j.status === "Hired").length,
+    offerAccepted: list.filter((j) => j.status === "Offer Accepted").length,
   }));
 
   const chartData = toChartPoints(
@@ -50,16 +50,16 @@ const Contracts = () => {
   );
 
   const pieData = toChartPoints(
-    contractCounts.reduce((acc, { name, hired }) => {
-      acc[name] = hired;
+    contractCounts.reduce((acc, { name, offerAccepted }) => {
+      acc[name] = offerAccepted;
       return acc;
     }, {} as Record<string, number>)
   );
 
-  const directors = Array.from(new Set(hired.map((j) => j.director))).sort();
+  const directors = Array.from(new Set(offerAccepted.map((j) => j.director))).sort();
 
   const matrix = directors.map((director) => {
-    const directorJobs = hired.filter((j) => j.director === director);
+    const directorJobs = offerAccepted.filter((j) => j.director === director);
     const row: Record<string, number | string> = { director };
     CONTRACT_TYPES.forEach((type) => {
       row[type] = directorJobs.filter((j) => j.type_of_contract === type).length;
