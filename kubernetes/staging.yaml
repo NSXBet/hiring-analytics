@@ -1,0 +1,53 @@
+kubernetes:
+  base:
+    sourceRepo:
+      name: hiring-analytics
+      org: NSXBet
+    monoRepo:
+      url: git@github.com:NSXBet/monorepo-gitops.git
+      appsFolder: apps-config
+      argoCDValues: helms/argocd/values.yaml
+      repository: monorepo-gitops
+    containerRegistry:
+      url: 492684252576.dkr.ecr.us-east-1.amazonaws.com
+    deployConfig:
+      cluster: EKS-NSX-Staging-1
+      environment: staging
+    metadata:
+      team: sre
+  apps:
+  - name: hiring-analytics
+    dockerfile: ./Dockerfile
+    imagePullPolicy: Always
+    kind: deployment
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+    hpa:
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 70
+    service:
+      istio: true
+      metrics:
+        port: 8000
+      healthcheck:
+        initialDelaySeconds: 7
+        interval: 10
+        path: /health
+        port: 8000
+        timeoutSeconds: 5
+      ports:
+      - containerPort: 8000
+        name: hiring-analytics
+        virtualservice:
+          gateway: internal-gateway
+          hosts:
+          - staging-hiring-analytics.nsx.dev
+    envs:
+    - name: NODE_ENV
+      value: staging
