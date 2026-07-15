@@ -87,10 +87,10 @@ const Diversity = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Hired by Gender</CardTitle>
+              <CardTitle className="text-base font-semibold">Offer Accepted by Gender</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={hiredByGender} label="Hired" />
+              <SimpleBarChart data={offerAcceptedByGender} label="Offer Accepted" />
             </CardContent>
           </Card>
         </motion.div>
