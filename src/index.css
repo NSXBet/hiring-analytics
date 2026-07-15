@@ -38,6 +38,16 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
+    --status-interview: 217 91% 60%;
+    --status-offer: 45 93% 47%;
+    --status-kickoff: 160 84% 39%;
+    --status-standby: 270 50% 60%;
+    --status-offer-accepted: 142 76% 36%;
+    --status-canceled: 0 72% 51%;
+    --status-turnover: 25 95% 53%;
+    --status-withdrawn: 215 16% 47%;
+    --status-tbd: 220 9% 46%;
+
     --sidebar-background: 0 0% 98%;
 
     --sidebar-foreground: 240 5.3% 26.1%;
