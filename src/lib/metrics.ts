@@ -27,26 +27,26 @@ export const getAverageTimeToFill = (jobs: Job[]): number => {
   return Math.round(total / closed.length);
 };
 
-export const getHiredJobs = (jobs: Job[]) => jobs.filter((j) => j.status === "Hired");
+export const getOfferAcceptedJobs = (jobs: Job[]) => jobs.filter((j) => j.status === "Offer Accepted");
 
 export const getClosedJobs = (jobs: Job[]) => jobs.filter((j) => CLOSED_STATUSES.includes(j.status));
 
 export const getSLAAdherence = (jobs: Job[]): number => {
-  const hired = getHiredJobs(jobs).filter((j) => j.closing_date);
-  if (hired.length === 0) return 0;
-  const onTime = hired.filter((j) => {
+  const offerAccepted = getOfferAcceptedJobs(jobs).filter((j) => j.closing_date);
+  if (offerAccepted.length === 0) return 0;
+  const onTime = offerAccepted.filter((j) => {
     if (!j.committed_date) return true;
     return differenceInCalendarDays(parseISO(j.closing_date!), parseISO(j.committed_date)) <= 0;
   }).length;
-  return Math.round((onTime / hired.length) * 100);
+  return Math.round((onTime / offerAccepted.length) * 100);
 };
 
 export const getConversionRate = (jobs: Job[]): number => {
   if (jobs.length === 0) return 0;
-  return Math.round((getHiredJobs(jobs).length / jobs.length) * 100);
+  return Math.round((getOfferAcceptedJobs(jobs).length / jobs.length) * 100);
 };
 
-export const getActiveJobs = (jobs: Job[]) => jobs.filter((j) => !["Hired", "Canceled", "Withdrawn"].includes(j.status));
+export const getActiveJobs = (jobs: Job[]) => jobs.filter((j) => !["Offer Accepted", "Canceled", "Withdrawn"].includes(j.status));
 
 export const groupBy = <K extends keyof Job>(jobs: Job[], key: K): Record<string, Job[]> =>
   jobs.reduce((acc, job) => {
