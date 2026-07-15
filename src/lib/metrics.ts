@@ -116,7 +116,7 @@ export const getMonthlyTrend = (jobs: Job[], year: number): { name: string; open
 
 export const getTotalJobs = (jobs: Job[]) => jobs.length;
 
-export const getOpenJobs = (jobs: Job[]) => jobs.filter((j) => j.status !== "Hired" && j.status !== "Canceled" && j.status !== "Withdrawn");
+export const getOpenJobs = (jobs: Job[]) => jobs.filter((j) => j.status !== "Offer Accepted" && j.status !== "Canceled" && j.status !== "Withdrawn");
 
 export const getStatusCounts = (jobs: Job[]): ChartPoint[] =>
   Object.entries(
