@@ -21,19 +21,19 @@ const Geography = () => {
   const countryStats = Object.entries(groupBy(jobs, "country")).map(([name, list]) => ({
     name,
     total: list.length,
-    hired: list.filter((j) => j.status === "Hired").length,
+    offerAccepted: list.filter((j) => j.status === "Offer Accepted").length,
     avgDays: getAverageTimeToFill(list),
   }));
 
-  const sortedByHired = [...countryStats].sort((a, b) => b.hired - a.hired);
+  const sortedByOfferAccepted = [...countryStats].sort((a, b) => b.offerAccepted - a.offerAccepted);
   const avgConversion =
     countryStats.length > 0
-      ? Math.round(countryStats.reduce((sum, c) => sum + (c.total > 0 ? (c.hired / c.total) * 100 : 0), 0) / countryStats.length)
+      ? Math.round(countryStats.reduce((sum, c) => sum + (c.total > 0 ? (c.offerAccepted / c.total) * 100 : 0), 0) / countryStats.length)
       : 0;
 
   const chartData = toChartPoints(
-    countryStats.reduce((acc, { name, hired }) => {
-      acc[name] = hired;
+    countryStats.reduce((acc, { name, offerAccepted }) => {
+      acc[name] = offerAccepted;
       return acc;
     }, {} as Record<string, number>)
   );
@@ -52,12 +52,12 @@ const Geography = () => {
           <Globe className="h-6 w-6 text-primary" />
           Geography
         </h2>
-        <p className="text-muted-foreground">Hires distribution by country.</p>
+        <p className="text-muted-foreground">Offers Accepted distribution by country.</p>
       </motion.div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Countries" value={countryStats.length} icon={MapPin} color="primary" delay={0} />
-        <StatCard label="Top Country" value={sortedByHired[0]?.name || "—"} icon={Globe} color="accent" delay={1} />
+        <StatCard label="Top Country" value={sortedByOfferAccepted[0]?.name || "—"} icon={Globe} color="accent" delay={1} />
         <StatCard label="Average Conversion" value={`${avgConversion}%`} icon={TrendingUp} color="accent" delay={2} />
         <StatCard label="Overall Average Time" value={`${getAverageTimeToFill(jobs)} days`} icon={Clock} color="primary" delay={3} />
       </div>
@@ -66,10 +66,10 @@ const Geography = () => {
         <motion.div variants={staggerItem}>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-base font-semibold">Hires by Country</CardTitle>
+              <CardTitle className="text-base font-semibold">Offers Accepted by Country</CardTitle>
             </CardHeader>
             <CardContent>
-              <SimpleBarChart data={chartData} label="Hires" />
+              <SimpleBarChart data={chartData} label="Offers Accepted" />
             </CardContent>
           </Card>
         </motion.div>
@@ -98,11 +98,11 @@ const Geography = () => {
               columns={[
                 { key: "name", header: "Country" },
                 { key: "total", header: "Total Jobs" },
-                { key: "hired", header: "Hired" },
+                { key: "offerAccepted", header: "Offer Accepted" },
                 {
                   key: "conversion",
                   header: "Conversion",
-                  render: (row) => `${row.total > 0 ? Math.round((row.hired / row.total) * 100) : 0}%`,
+                  render: (row) => `${row.total > 0 ? Math.round((row.offerAccepted / row.total) * 100) : 0}%`,
                 },
                 { key: "avgDays", header: "Average Time (days)" },
               ]}
