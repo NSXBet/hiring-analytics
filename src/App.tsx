@@ -25,7 +25,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <YearProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/hiring-analytics">
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Overview />} />
