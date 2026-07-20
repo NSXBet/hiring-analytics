@@ -39,7 +39,7 @@ on:
         default: '["build","push","versioning","deploy"]'
 jobs:
   deploy:
-    uses: NSXBet/github-workflows/.github/workflows/deploy_v2.yaml@main
+    uses: NSXBet/github-workflows/.github/workflows/deploy_v2.yaml@c961e28e84132883791b7fa875ed0505d34a7afc  # main
     secrets: inherit
     with:
       sonar: ${{ inputs.sonar }}
